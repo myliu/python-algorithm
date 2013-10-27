@@ -6,11 +6,7 @@ def findRightBoundary(buildings):
 	To find the rightmost boundary of all buildings
 	O(n)
 	"""
-	max = 0
-	for b in buildings:
-		if b[2] > max:
-			max = b[2]
-	return max + 1
+	return max([y[2] for y in buildings]) + 1
 
 def draw(buildings):
 	"""
@@ -34,8 +30,7 @@ def convert(heights):
 	skyline.append(0)
 	skyline.append(heights[0])
 
-	i = 1
-	for i in range(len(heights)):
+	for i in range(1, len(heights)):
 		if heights[i] != heights[i - 1]:
 			skyline.append(i)
 			skyline.append(heights[i])

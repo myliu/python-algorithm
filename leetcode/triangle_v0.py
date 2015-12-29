@@ -5,17 +5,17 @@ class Solution(object):
         :type triangle: List[List[int]]
         :rtype: int
         """
-        min_dict = {}
+        min_dict = [[0 for i in xrange(len(row))] for row in triangle]
 
         def dfs(x, y):
             if x == len(triangle):
                 return 0
 
-            if (x, y) in min_dict.keys():
-                return min_dict[(x, y)]
+            if min_dict[x][y] != 0:
+                return min_dict[x][y]
 
-            min_dict[(x, y)] = min(dfs(x+1, y), dfs(x+1, y+1)) + triangle[x][y]
-            return min_dict[(x, y)]
+            min_dict[x][y] = min(dfs(x+1, y), dfs(x+1, y+1)) + triangle[x][y]
+            return min_dict[x][y]
 
         return dfs(0, 0)
 

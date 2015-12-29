@@ -1,26 +1,23 @@
 class Solution(object):
-    
-    def __init__(self):
-        self.min_dict = {}
 
     def minimumTotal(self, triangle):
         """
         :type triangle: List[List[int]]
         :rtype: int
         """
-        return self.dfs(0, 0, triangle)
-        
-    def dfs(self, x, y, triangle):
-        if x == len(triangle) - 1:
-            self.min_dict[(x, y)] = triangle[x][y]
-            return triangle[x][y]
+        min_dict = {}
 
-        left = self.min_dict[(x+1, y)] if (x+1, y) in self.min_dict.keys() else self.dfs(x+1, y, triangle)
-        right = self.min_dict[(x+1, y+1)] if (x+1, y+1) in self.min_dict.keys() else self.dfs(x+1, y+1, triangle)
-        result = min(left, right) + triangle[x][y]
-        self.min_dict[(x, y)] = result
-        print x, y, result
-        return result
+        def dfs(x, y):
+            if x == len(triangle):
+                return 0
+
+            if (x, y) in min_dict.keys():
+                return min_dict[(x, y)]
+
+            min_dict[(x, y)] = min(dfs(x+1, y), dfs(x+1, y+1)) + triangle[x][y]
+            return min_dict[(x, y)]
+
+        return dfs(0, 0)
 
 if __name__ == '__main__':
     s = Solution()

@@ -18,3 +18,7 @@ class Solution(object):
 
         if right > 0 and right > left:
             self.helper(result, current + ')', left, right - 1)
+
+if __name__ == '__main__':
+    s = Solution()
+    print s.generateParenthesis(3)

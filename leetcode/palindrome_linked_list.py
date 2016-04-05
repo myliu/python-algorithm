@@ -6,14 +6,34 @@
 
 class Solution(object):
     def isPalindrome(self, head):
-        rev = None
-        slow = fast = head
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        # Reverse the linked list till the middle point
+        prev = None
+        current = fast = head
+
         while fast and fast.next:
             fast = fast.next.next
-            rev, rev.next, slow = slow, rev, slow.next
+
+            next = current.next
+            current.next = prev
+            prev = current
+            current = next
+
+        # When the number of nodes is odd
         if fast:
-            slow = slow.next
-        while rev and rev.val == slow.val:
-            slow = slow.next
-            rev = rev.next
-        return not rev
+            forward = current.next
+        # When the number of nodes is even
+        else:
+            forward = current
+
+        reverse = prev
+
+        # From the middle point, compare the nodes in both directions
+        while reverse and reverse.val == forward.val:
+            reverse = reverse.next
+            forward = forward.next
+
+        return not reverse

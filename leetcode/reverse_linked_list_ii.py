@@ -13,13 +13,10 @@ class Solution(object):
         :rtype: ListNode
         """
         def reverse(head):
-            revtail = head
+            revtail = curr = head
             prev = None
-            while head:
-                current = head
-                head = head.next
-                current.next = prev
-                prev = current
+            while curr:
+                curr.next, prev, curr = prev, curr, curr.next
             # return reverse head and reverse tail
             return prev, revtail
 

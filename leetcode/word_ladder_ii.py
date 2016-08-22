@@ -16,9 +16,15 @@ class Solution(object):
         """
         # First, BFS to build an adjacency map
         # Second, DFS to output all the solutions
+        if not wordlist:
+            return []
+
+        wordlist.add(endWord)
+
         ladder = defaultdict(lambda: float('inf'))
         ladder[beginWord] = 0
 
+        # min_step is important here since it is possible there are multiple solutions
         min_step = float('inf')
         q = deque()
         q.append(beginWord)
@@ -33,25 +39,37 @@ class Solution(object):
                 for c in ascii_lowercase:
                     new_word = word[:i] + c + word[i+1:]
                     if new_word in wordlist:
-                        if step >= ladder[new_word]:
+                        if step > ladder[new_word]:
                             continue
 
-                        ladder[new_word] = step
+                        if step < ladder[new_word]:
+                            ladder[new_word] = step
+                            q.append(new_word)
+
+                        """
+                        ["hit","hot","dot","dog","cog"]
+                        ["hit","hot","lot","log","cog"]
+                        When we reach "cog" for the second time, step is the same as ladder[new_word].
+                        """
+
                         self.adjacency_map[new_word].append(word)
-                        q.append(new_word)
 
                         if new_word == endWord:
                             min_step = step
 
-        print ladder
-        print self.adjacency_map
-        """
-        defaultdict(<function <lambda> at 0x1019abd70>, {'hit': 0, 'log': 3, 'dog': 3, 'hot': 1, 'lot': 2, 'dot': 2})
-        defaultdict(<type 'list'>, {'log': ['lot'], 'hot': ['hit'], 'lot': ['hot'], 'dot': ['hot'], 'dog': ['dot']})
-        """
+        self.dfs(beginWord, endWord, tuple())
+        return self.results
+
+    def dfs(self, begin, end, result):
+        if begin == end:
+            self.results.append(list((begin,) + result))
+            return
+
+        for word in self.adjacency_map[end]:
+            self.dfs(begin, word, (end,) + result)
 
 
 if __name__ == '__main__':
     s = Solution()
-    wordlist = ["hot","dot","dog","lot","log"]
+    wordlist = set(["hot","dot","dog","lot","log"])
     s.findLadders('hit', 'cog', wordlist)

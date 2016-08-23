@@ -10,10 +10,9 @@ class Solution(object):
             return False
 
         def find(node):
-            i, j = node[0], node[1]
-            if nodes[(i, j)] != (i, j):
-                nodes[(i, j)] = find(nodes[(i, j)])
-            return nodes[(i, j)]
+            if nodes[node] != node:
+                nodes[node] = find(nodes[node])
+            return nodes[node]
 
         def union(node1, node2):
             nodes[find(node1)] = nodes[find(node2)]

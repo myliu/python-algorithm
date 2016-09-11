@@ -8,11 +8,22 @@ class NumMatrix(object):
             return
 
         m, n = len(matrix), len(matrix[0])
-        self.nums = [[0 for _ in range(n)] for _ in range(m)]
+        self.matrix = matrix
         self.bit = [[0 for _ in range(n+1)] for _ in range(m+1)]
         for i in range(m):
             for j in range(n):
-                self.update(i, j, matrix[i][j])
+                self.init(i, j, matrix[i][j])
+
+    def init(self, row, col, val):
+        matrix = self.matrix
+        m, n = len(matrix), len(matrix[0])
+        i = row + 1
+        while i <= m:
+            j = col + 1
+            while j <= n:
+                self.bit[i][j] += val
+                j += j & (-j)
+            i += i & (-i)
 
     def update(self, row, col, val):
         """
@@ -22,17 +33,11 @@ class NumMatrix(object):
         :type val: int
         :rtype: void
         """
-        nums = self.nums
-        m, n = len(nums), len(nums[0])
-        delta = val - nums[row][col]
-        nums[row][col] = val
-        i = row + 1
-        while i <= m:
-            j = col + 1
-            while j <= n:
-                self.bit[i][j] += delta
-                j += j & (-j)
-            i += i & (-i)
+        matrix = self.matrix
+        m, n = len(matrix), len(matrix[0])
+        delta = val - matrix[row][col]
+        matrix[row][col] = val
+        self.init(row, col, delta)
 
     def sumRegion(self, row1, col1, row2, col2):
         """

@@ -14,6 +14,6 @@ class Solution(object):
             if s[start % n] == ' ':
                 start += 1
             else:
-                while start >= 0 and s[(start-1) % n] != ' ':
+                while s[(start-1) % n] != ' ':
                     start -= 1
         return start / n

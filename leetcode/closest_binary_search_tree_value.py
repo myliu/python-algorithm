@@ -12,19 +12,15 @@ class Solution(object):
         :type target: float
         :rtype: int
         """
-        return self.helper(root, target, sys.maxint)
+        return self.helper(root, target, float('inf'))
 
     def helper(self, root, target, closest):
-        if root is None:
+        if not root:
             return closest
-
-        if target == root.val:
-            return root.val
 
         closest = root.val if abs(root.val-target) < abs(closest-target) else closest
 
         if target > root.val:
             return self.helper(root.right, target, closest)
-
-        if target < root.val:
+        else:
             return self.helper(root.left, target, closest)

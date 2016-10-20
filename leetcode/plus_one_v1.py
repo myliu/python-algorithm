@@ -11,13 +11,13 @@ class Solution(object):
         ['1', '2', '3']
         >>> ''.join(map(str, digits))
         '123'
-        >>> int(''.join(map(str, digits)), 10)
+        >>> int(''.join(map(str, digits)))
         123
-        >>> int(''.join(map(str, digits)), 10) + 1
+        >>> int(''.join(map(str, digits))) + 1
         124
-        >>> str(int(''.join(map(str, digits)), 10) + 1)
+        >>> str(int(''.join(map(str, digits))) + 1)
         '124'
-        >>> map(int, str(int(''.join(map(str, digits)), 10) + 1))
+        >>> map(int, str(int(''.join(map(str, digits))) + 1))
         [1, 2, 4]
         """
-        return map(int, str(int(''.join(map(str, digits)), 10) + 1))
+        return map(int, str(int(''.join(map(str, digits))) + 1))

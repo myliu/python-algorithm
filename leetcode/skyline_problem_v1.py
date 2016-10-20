@@ -9,6 +9,7 @@ class Solution:
         i, n = 0, len(LRH)
 
         while i < n or live_hr:
+            print i, live_hr
             if not live_hr or i < n and LRH[i][0] <= -live_hr[0][1]:
                 x = LRH[i][0]
                 while i < n and LRH[i][0] == x:

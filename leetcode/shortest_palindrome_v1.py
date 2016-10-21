@@ -1,3 +1,4 @@
+# KMP-based
 class Solution(object):
     def shortestPalindrome(self, s):
         """

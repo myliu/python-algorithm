@@ -5,11 +5,11 @@ class LRUCache(object):
         :type capacity: int
         """
         self.cache = {}
+        self.capacity = capacity
         self.head = Node(-1, -1)
         self.tail = Node(-1, -1)
         self.head.next = self.tail
         self.tail.prev = self.head
-        self.capacity = capacity
 
 
     def get(self, key):
@@ -42,14 +42,14 @@ class LRUCache(object):
 
         if len(cache) >= self.capacity:
             del cache[head.next.key]
-            head.next.next.prev = head
             head.next = head.next.next
+            head.next.prev = head
 
-        current = Node(key, value)
-        cache[key] = current
-        self.move_to_tail(current)
+        node = Node(key, value)
+        cache[key] = node
+        self.move_to_tail(node)
 
-    
+
     def move_to_tail(self, node):
         head, tail = self.head, self.tail
 

@@ -21,8 +21,12 @@ class Solution(object):
                 heapq.heappush(pq, p[1])
             else:
                 if -p[1] in pq:
-                    pq.remove(-p[1])
-                    heapq.heapify(pq)
+                    i = pq.index(-p[1])
+                    pq[i] = pq[-1]
+                    pq.pop()
+                    if i < len(pq):
+                        heapq._siftup(pq, i)
+                        heapq._siftdown(pq, 0, i)
 
             current = -pq[0]
             if prev != current:

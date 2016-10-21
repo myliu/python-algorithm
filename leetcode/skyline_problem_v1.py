@@ -1,5 +1,6 @@
 from heapq import *
 
+# Accepted, but hard to understand
 class Solution:
     def getSkyline(self, LRH):
         # Priority Queue to store the height and right position of the live buildings
@@ -12,6 +13,7 @@ class Solution:
             print i, live_hr
             if not live_hr or i < n and LRH[i][0] <= -live_hr[0][1]:
                 x = LRH[i][0]
+                # This is to handle the case where two buildings have the same left boundary
                 while i < n and LRH[i][0] == x:
                     heappush(live_hr, [-LRH[i][2], -LRH[i][1]])
                     i += 1

@@ -1,10 +1,9 @@
-import heapq
-
 # Definition for an interval.
 # class Interval(object):
 #     def __init__(self, s=0, e=0):
 #         self.start = s
 #         self.end = e
+from heapq import *
 
 class SummaryRanges(object):
 
@@ -19,7 +18,7 @@ class SummaryRanges(object):
         :type val: int
         :rtype: void
         """
-        heapq.heappush(self.intervals, (val, Interval(val, val)))
+        heappush(self.intervals, (val, Interval(val, val)))
 
     def getIntervals(self):
         """
@@ -27,15 +26,15 @@ class SummaryRanges(object):
         """
         stack = []
         while self.intervals:
-            idx, val = heapq.heappop(self.intervals)
+            idx, interval = heappop(self.intervals)
             if not stack:
-                stack.append((idx, val))
+                stack += (idx, interval),
             else:
                 _, prev = stack[-1]
-                if prev.end + 1 >= val.start:
-                    prev.end = max(prev.end, val.end)
+                if prev.end + 1 >= interval.start:
+                    prev.end = max(prev.end, interval.end)
                 else:
-                    stack.append((idx, val))
+                    stack += (idx, interval),
         self.intervals = stack
         return map(lambda x: x[1], stack)
 

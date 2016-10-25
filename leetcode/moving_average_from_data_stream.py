@@ -1,4 +1,4 @@
-import collections
+from collections import deque
 
 class MovingAverage(object):
 
@@ -7,16 +7,16 @@ class MovingAverage(object):
         Initialize your data structure here.
         :type size: int
         """
-        self.queue = collections.deque(maxlen=size)
+        self.window = deque(maxlen=size)
 
     def next(self, val):
         """
         :type val: int
         :rtype: float
         """
-        queue = self.queue
-        queue.append(val)
-        return float(sum(queue))/len(queue)
+        window = self.window
+        window += val,
+        return float(sum(window)) / len(window)
 
 # Your MovingAverage object will be instantiated and called as such:
 # obj = MovingAverage(size)

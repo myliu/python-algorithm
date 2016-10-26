@@ -27,7 +27,7 @@ class MedianFinder:
         if len(large) > len(small):
             return float(large[0])
         else:
-            return float(large[0]-small[0])/2
+            return float(large[0] - small[0]) / 2
 
 # Your MedianFinder object will be instantiated and called as such:
 # mf = MedianFinder()

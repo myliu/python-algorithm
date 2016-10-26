@@ -4,19 +4,14 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
-        def helper(l, r, res):
+        def helper(l, r):
             while l >= 0 and r < len(s) and s[l] == s[r]:
                 l -= 1
                 r += 1
-
-            # Move this if statement outside the while loop simply for performance sake                
-            if r - l - 1 > len(res):
-                res = s[l+1:r]
-
-            return res
-
-        res = ''
-        for i, v in enumerate(s):
-            res = helper(i, i, res)
-            res = helper(i, i+1, res)
-        return res
+            return s[l+1:r]
+            
+        longest = ''
+        for i in range(len(s)):
+            longest = max(longest, helper(i, i), key=len)
+            longest = max(longest, helper(i, i+1), key=len)
+        return longest

@@ -1,45 +1,53 @@
-import sys
-
-class Solution:
-    # @return a float
-    def findMedianSortedArrays(self, A, B):
-        length = len(A) + len(B)
-        if length % 2 == 0:
-            return (self.find_Kth(A, 0, B, 0, length/2) + self.find_Kth(A, 0, B, 0, length/2+1)) / 2.0
+class Solution(object):
+    def findMedianSortedArrays(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: float
+        """
+        n = len(nums1) + len(nums2)
+        if n % 2 == 0:
+            # Return float, thus 2.0
+            return (self.find_kth(nums1, 0, nums2, 0, n/2) + self.find_kth(nums1, 0, nums2, 0, n/2+1)) / 2.0
         else:
-            return self.find_Kth(A, 0, B, 0, length/2+1)
+            return self.find_kth(nums1, 0, nums2, 0, n/2+1)
 
-    def find_Kth(self, A, A_start, B, B_start, k):
-        if A_start >= len(A):
-            print A_start
-            print 'if A_start >= len(A): ' + str(B[B_start + k - 1])
-            return B[B_start + k - 1]
+    """
+    The idea is that at each iteration, we reduce k by k/2.
+    Thus, we have call like self.find_kth(nums1, start1 + k/2, nums2, start2, k - k/2)
+    In order to determine which part to discard, we should compare nums1[start1 + k/2 - 1].
+    """
+    def find_kth(self, nums1, start1, nums2, start2, k):
+            if start1 >= len(nums1):
+                print start1
+                print 'if start1 >= len(nums1): ' + str(nums2[start2+k-1])
+                return nums2[start2+k-1]
 
-        if B_start >= len(B):
-            print B_start
-            print 'if B_start >= len(B): ' + str(A[A_start + k - 1])
-            return A[A_start + k - 1]
+            if start2 >= len(nums2):
+                print start2
+                print 'if start2 >= len(nums2): ' + str(nums1[start1+k-1])
+                return nums1[start1+k-1]
 
-        if k == 1:
-            print 'if k==1 find_Kth: ' + str(min(A[A_start], B[B_start]))
-            return min(A[A_start], B[B_start])
+            if k == 1:
+                print 'if k==1 find_kth: ' + str(min(nums1[start1], nums2[start2]))
+                return min(nums1[start1], nums2[start2])
 
-        A_key = A[A_start + k/2 - 1] if A_start + k/2 - 1 < len(A) else sys.maxint
-        B_key = B[B_start + k/2 - 1] if B_start + k/2 - 1 < len(B) else sys.maxint
+            discard1 = nums1[start1 + k/2 - 1] if start1 + k/2 - 1 < len(nums1) else float('inf')
+            discard2 = nums2[start2 + k/2 - 1] if start2 + k/2 - 1 < len(nums2) else float('inf')
 
-        print 'k: ' + str(k)
-        print 'A Key: ' + str(A_key)
-        print 'B Key: ' + str(B_key)
+            print 'k: ' + str(k)
+            print 'discard1: ' + str(discard1)
+            print 'discard2: ' + str(discard2)
 
-        if A_key <= B_key:
-            return self.find_Kth(A, A_start + k/2, B, B_start, k - k/2)
-        else:
-            return self.find_Kth(A, A_start, B, B_start + k/2, k - k/2)
-
+            if discard1 <= discard2:
+                # The last argument should be k - k/2 because k could be odd number, like 5.
+                return self.find_kth(nums1, start1 + k/2, nums2, start2, k - k/2)
+            else:
+                return self.find_kth(nums1, start1, nums2, start2 + k/2, k - k/2)
 
 
 if __name__ == '__main__':
     s = Solution()
-    A = [1, 2, 3]
-    B = [4, 5, 7]
+    A = [1, 2, 3, 4, 5]
+    B = [6, 7, 8, 9, 10]
     print s.findMedianSortedArrays(A, B)

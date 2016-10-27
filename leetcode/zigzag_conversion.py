@@ -5,11 +5,11 @@ class Solution(object):
         :type numRows: int
         :rtype: str
         """
-        if numRows == 1 or not s:
+        if not s or numRows == 1:
             return s
 
         matrix = [''] * numRows
-        row, step = 0, 888
+        row, step = 0, 0
         for c in s:
             if row == 0:
                 step = 1

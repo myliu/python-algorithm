@@ -16,24 +16,23 @@ class Solution(object):
         :type p: str
         :rtype: bool
         """
-        dp = [[False for j in range(len(p)+1)] for i in range(len(s)+1)]
+        m, n = len(s), len(p)
+        dp = [[False for _ in range(n+1)] for _ in range(m+1)]
 
         dp[0][0] = True
-        
-        for k, v in enumerate(p):
-            if v == '*' and dp[0][k-1]:
-                dp[0][k+1] = True
 
-        for i in xrange(len(s)):
-            for j in xrange(len(p)):
-                if p[j] == s[i]:
-                    dp[i+1][j+1] = dp[i][j]
-                elif p[j] == '.':
+        for i in range(n):
+            if p[i] == '*':
+                dp[0][i+1] = dp[0][i-1]
+
+        for i in range(m):
+            for j in range(n):
+                if p[j] in (s[i], '.'):
                     dp[i+1][j+1] = dp[i][j]
                 elif p[j] == '*':
-                    if p[j-1] != s[i] and p[j-1] != '.':
-                        dp[i+1][j+1] = dp[i+1][j-1]
-                    else:
+                    if p[j-1] in (s[i], '.'):
                         dp[i+1][j+1] = dp[i+1][j-1] or dp[i+1][j] or dp[i][j+1]
+                    else:
+                        dp[i+1][j+1] = dp[i+1][j-1]
 
-        return dp[len(s)][len(p)]
+        return dp[m][n]

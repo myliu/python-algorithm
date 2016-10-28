@@ -7,21 +7,21 @@ class Solution(object):
         if not nums or len(nums) <= 2:
             return []
 
-        results = []
+        results = set()
         nums.sort()
         for i in range(2, len(nums)):
             target = 0 - nums[i]
             left, right = 0, i - 1
             while left < right:
-                sum = nums[left] + nums[right]
-                if sum == target:
+                _sum = nums[left] + nums[right]
+                if _sum == target:
                     results.add((nums[left], nums[right], nums[i]))
                     left += 1
-                elif sum > target:
+                elif _sum > target:
                     right -= 1
                 else:
                     left += 1
-        return sorted([sorted(result) for result in results])
+        return map(list, results)
 
 if __name__ == '__main__':
     s = Solution()

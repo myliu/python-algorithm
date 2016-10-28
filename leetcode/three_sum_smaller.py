@@ -9,14 +9,14 @@ class Solution(object):
         count = 0
         for i in range(2, len(nums)):
             t = target - nums[i]
-            l, r = 0, i - 1
-            while l < r:
-                sum = nums[l] + nums[r]
-                if sum < t:
-                    count += r - l
-                    l += 1
+            left, right = 0, i - 1
+            while left < right:
+                _sum = nums[left] + nums[right]
+                if _sum < t:
+                    count += right - left
+                    left += 1
                 else:
-                    r -= 1
+                    right -= 1
         return count
 
 if __name__ == '__main__':

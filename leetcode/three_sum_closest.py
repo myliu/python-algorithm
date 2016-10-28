@@ -1,5 +1,3 @@
-from sys import maxint
-
 class Solution(object):
     def threeSumClosest(self, nums, target):
         """
@@ -7,21 +5,21 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
-        closest = maxint
+        closest = float('inf')
         nums.sort()
         for i in range(2, len(nums)):
             t = target - nums[i]
-            l, r = 0, i - 1
-            while l < r:
-                sum = nums[l] + nums[r]
-                if sum == t:
+            left, right = 0, i - 1
+            while left < right:
+                _sum = nums[left] + nums[right]
+                if _sum == t:
                     return target
-                elif sum > t:
-                    r -= 1
+                elif _sum > t:
+                    right -= 1
                 else:
-                    l += 1
-                if abs(t - sum) < abs(target - closest):
-                    closest = sum + nums[i]
+                    left += 1
+                if abs(t - _sum) < abs(target - closest):
+                    closest = _sum + nums[i]
         return closest
 
 if __name__ == '__main__':

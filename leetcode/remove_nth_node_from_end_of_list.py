@@ -11,14 +11,16 @@ class Solution(object):
         :type n: int
         :rtype: ListNode
         """
-        dummy = left = right = ListNode(0)
-        dummy.next = head
-        for i in xrange(n+1):
+        left = right = dummy = ListNode(-1)
+        dummy.next = head 
+
+        for i in range(n):
             right = right.next
 
-        while right:
+        while right.next:
             left = left.next
             right = right.next
 
         left.next = left.next.next
+
         return dummy.next

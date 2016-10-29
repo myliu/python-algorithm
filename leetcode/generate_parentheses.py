@@ -5,19 +5,20 @@ class Solution(object):
         :rtype: List[str]
         """
         result = []
-        self.helper(result, '', n, n)
+        self.helper(n, n, '', result)
         return result
-
-    def helper(self, result, current, left, right):
+    
+    def helper(self, left, right, tmp, result):
         if left == 0 and right == 0:
-            result.append(current)
+            if tmp:
+                result += tmp,
             return
 
         if left > 0:
-            self.helper(result, current + '(', left - 1, right)
+            self.helper(left-1, right, tmp+'(', result)
 
         if right > 0 and right > left:
-            self.helper(result, current + ')', left, right - 1)
+            self.helper(left, right-1, tmp+')', result)
 
 if __name__ == '__main__':
     s = Solution()

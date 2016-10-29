@@ -4,15 +4,16 @@ class Solution(object):
         :type digits: str
         :rtype: List[str]
         """
-        def helper(digits, tmp, mapping, res):
-            if not digits:
-                if tmp:
-                    res.append(tmp)
-                return
-            for i in list(mapping[int(digits[0])]):
-                helper(digits[1:], tmp + i, mapping, res)
-
         mapping = ['', '', 'abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz']
-        res = []
-        helper(digits, '', mapping, res)
-        return res
+        result = []
+        self.helper(digits, '', result, mapping)
+        return result
+
+    def helper(self, digits, tmp, result, mapping):
+        if not digits:
+            if tmp:
+                result += tmp,
+            return
+
+        for c in mapping[int(digits[0])]:
+            self.helper(digits[1:], tmp+c, result, mapping)

@@ -11,23 +11,18 @@ class Solution(object):
         :type k: int
         :rtype: ListNode
         """
-        if not head or k < 2:
-            return head
-
-        ret = head
-        for i in range(k-1):
-            ret = ret.next
-            if not ret:
-                return head
-
-        prev = None
-        current = head
+        curr = head
         for i in range(k):
-            _next = current.next
-            current.next = prev
-            prev = current
-            current = _next
+            if not curr:
+                return head
+            curr = curr.next
 
-        head.next = self.reverseKGroup(current, k)
+        prev, curr = None, head
+        for i in range(k):
+            next = curr.next
+            curr.next = prev
+            prev, curr = curr, next
 
-        return ret
+        head.next = self.reverseKGroup(curr, k)
+
+        return prev

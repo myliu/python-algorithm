@@ -11,14 +11,17 @@ class Solution(object):
         :type l2: ListNode
         :rtype: ListNode
         """
-        dummy = cur = ListNode(0)
+        current = dummy = ListNode(-1)
+
         while l1 and l2:
-            if l1.val < l2.val:
-                cur.next = l1
+            if l1.val <= l2.val:
+                current.next = l1
                 l1 = l1.next
             else:
-                cur.next = l2
+                current.next = l2
                 l2 = l2.next
-            cur = cur.next
-        cur.next = l1 or l2
+            current = current.next
+
+        current.next = l1 or l2
+        
         return dummy.next

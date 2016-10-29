@@ -4,10 +4,9 @@ class Solution(object):
         :type strs: List[str]
         :rtype: str
         """
-        tmp = []
-        for x in zip(*strs):
-            if all(y == x[0] for y in x):
-                tmp.append(x[0])
-            else:
-                break
-        return ''.join(tmp)
+        prefix = ''
+        for col in zip(*strs):
+            if any(i != col[0] for i in col):
+                return prefix
+            prefix += col[0]
+        return prefix

@@ -11,15 +11,13 @@ class Solution(object):
         :type val: int
         :rtype: ListNode
         """
-        dummy = prev = ListNode(0)
-        prev.next = head
-        current = head
-        while current:
-            next = current.next
-            if current.val == val:
-                current = next
-                prev.next = current
+        dummy = ListNode(-1)
+        dummy.next = head
+        prev, curr = dummy, head
+        while curr:
+            if curr.val == val:
+                prev.next = curr.next
             else:
-                prev = current
-                current = next
+                prev = curr
+            curr = curr.next
         return dummy.next

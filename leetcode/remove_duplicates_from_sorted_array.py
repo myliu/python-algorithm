@@ -4,15 +4,17 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        if nums is None or len(nums) == 0:
+        # Maintain an array of unique elements.
+        # end is the index of the last element of the array.
+        if not nums:
             return 0
 
-        size = 0
-        for i in range(len(nums)):
-            if nums[size] != nums[i]:
-                size = size + 1
-                nums[size] = nums[i]
-        return size + 1
+        end = 0
+        for num in nums:
+            if num != nums[end]:
+                nums[end+1] = num
+                end += 1
+        return end + 1
 
 
 if __name__ == '__main__':

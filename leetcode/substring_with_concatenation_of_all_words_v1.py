@@ -9,38 +9,42 @@ class Solution(object):
         :rtype: List[int]
         """
         counter = collections.Counter(words)
-        cur_dict = collections.defaultdict(int)
-        wlen = len(words[0])
-        res = []
+        window = collections.defaultdict(int)
+        _len = len(words[0])
+        result = []
 
-        for i in xrange(wlen):
-            # cur_dict holds word count in the current window
-            cur_dict.clear()
-            # count is the word count so far
-            count = 0
-            # left and right are the index of the window boundary
+        for i in range(_len):
+            # Left and right are the index of the window boundary
             left = right = i
-            while right + wlen <= len(s):
-                word = s[right:right+wlen]
+            # Window holds word count in the current window
+            window.clear()
+            # Count is the word count so far
+            count = 0
+            while right + _len <= len(s):
+                word = s[right:right+_len]
                 if word not in counter:
-                    cur_dict.clear()
+                    window.clear()
                     count = 0
-                    left = right + wlen
+                    left = right + _len
                 else:
-                    cur_dict[word] += 1
-                    if cur_dict[word] <= counter[word]:
+                    window[word] += 1
+                    if window[word] <= counter[word]:
                         count += 1
-                    while cur_dict[word] > counter[word]:
-                        tmp = s[left:left+wlen]
-                        cur_dict[tmp] -= 1
-                        if cur_dict[tmp] < counter[tmp]:
+                    while window[word] > counter[word]:
+                        tmp = s[left:left+_len]
+                        window[tmp] -= 1
+                        if window[tmp] < counter[tmp]:
                             count -= 1
-                        left += wlen
+                        left += _len
                     if count == len(words):
-                        res.append(left)
-                        tmp = s[left:left+wlen]
-                        cur_dict[tmp] -= 1
+                        result += left,
+                        tmp = s[left:left+_len]
+                        window[tmp] -= 1
                         count -= 1
-                        left += wlen
-                right += wlen
-        return res
+                        left += _len
+                right += _len
+        return result
+
+if __name__ == '__main__':
+    s = Solution()
+    print s.findSubstring("barfoofoobarthefoobarman", ["bar","foo","the"])

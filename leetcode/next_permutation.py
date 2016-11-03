@@ -1,10 +1,12 @@
 class Solution(object):
+
+    # https://discuss.leetcode.com/topic/30688/readable-code-without-confusing-i-j-and-with-explanation
     def nextPermutation(self, nums):
         """
         :type nums: List[int]
         :rtype: void Do not return anything, modify nums in-place instead.
         """
-        if len(nums) <= 1:
+        if not nums or len(nums) == 1:
             return
 
         i = len(nums) - 1
@@ -12,16 +14,17 @@ class Solution(object):
             if nums[i-1] < nums[i]:
                 break
             i -= 1
-        # At this point, nums[i-1] is the number to number to be swapped
 
-        if i != 0:
+        # nums[pivot] is the number to be swapped.
+        pivot = i - 1
+
+        if pivot != -1:
+            # nums[j] is the number in the weak decreasing sequence that is just greater than pivot.
             j = len(nums) - 1
-            while j > i - 1:
-                if nums[j] > nums[i-1]:
-                    tmp = nums[j]
-                    nums[j] = nums[i-1]
-                    nums[i-1] = tmp
+            while j > pivot:
+                if nums[j] > nums[pivot]:
+                    nums[pivot], nums[j] = nums[j], nums[pivot]
                     break
                 j -= 1
 
-        nums[i:] = nums[i:][::-1]
+        nums[pivot+1:] = nums[pivot+1:][::-1]

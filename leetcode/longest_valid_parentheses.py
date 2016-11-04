@@ -5,23 +5,19 @@ class Solution(object):
         :rtype: int
         """
         stack = []
+        _max = count = 0
         for i, c in enumerate(s):
             if c == '(':
-                stack.append(i)
+                stack += i,
             else:
                 if stack:
-                    top = stack[-1]
-                    if s[top] == '(':
-                        stack.pop()
-                        continue
-                stack.append(i)
-
-        if not stack:
-            return len(s)
-
-        left, maxlen = -1, 0
-        for i in stack:
-            maxlen = max(maxlen, i-left-1)
-            left = i
-        maxlen = max(maxlen, len(s)-left-1) 
-        return maxlen
+                    stack.pop()
+                    count += 2
+                    if not stack:
+                        _max = max(_max, count)
+                    else:
+                        # Handle the case: '(()()'
+                        _max = max(_max, i-stack[-1])
+                else:
+                    count = 0
+        return _max

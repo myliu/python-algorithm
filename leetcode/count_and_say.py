@@ -5,14 +5,15 @@ class Solution(object):
         :rtype: str
         """
         s = '1'
-        for _ in xrange(n-1):
-            current, count, temp = s[0], 0, ''
-            for i in s:
-                if i == current:
+        for _ in range(n-1):
+            first, count, tmp = s[0], 0, ''
+            for c in s:
+                if c == first:
                     count += 1
                 else:
-                    temp += str(count) + current
-                    current = i
+                    tmp += str(count) + first
+                    first = c
                     count = 1
-            s = temp + str(count) + current
+            tmp += str(count) + first
+            s = tmp
         return s

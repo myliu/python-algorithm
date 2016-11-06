@@ -11,8 +11,8 @@ class Solution(object):
 
             if nums[lo] <= target <= nums[hi]:
                 mid = (lo+hi)/2
-                l, r = search(lo, mid), search(mid+1, hi)
-                return max(l, r) if -1 in l+r else [l[0], r[1]]
+                left, right = search(lo, mid), search(mid+1, hi)
+                return max(left, right) if -1 in left + right else [left[0], right[1]]
 
             return [-1, -1]
 

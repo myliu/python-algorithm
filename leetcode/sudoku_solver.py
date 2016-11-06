@@ -4,38 +4,38 @@ class Solution(object):
         :type board: List[List[str]]
         :rtype: void Do not return anything, modify board in-place instead.
         """
-        def is_valid(board, i, j, c):
-            for row in xrange(0, 9):
-                if board[row][j] == c:
+        def is_valid(i, j, v):
+            for row in range(9):
+                if board[row][j] == v:
                     return False
 
-            for col in xrange(0, 9):
-                if board[i][col] == c:
+            for col in range(9):
+                if board[i][col] == v:
                     return False
 
-            for row in xrange(0, 3):
-                for col in xrange(0, 3):
-                    if board[(i/3)*3+row][(j/3)*3+col] == c:
+            for m in range(3):
+                for n in range(3):
+                    if board[(i/3)*3+m][(j/3)*3+n] == v:
                         return False
 
             return True
 
-        def solve(board):
+        def solve():
             if not board:
-                return
+                return False
 
-            for i in xrange(len(board)):
-                for j in xrange(len(board[0])):
-                    c = board[i][j]
-                    if c == '.':
-                        for d in xrange(1, 10):
-                            if is_valid(board, i, j, str(d)):
-                                board[i][j] = str(d)
-                                if solve(board):
+            for i in range(9):
+                for j in range(9):
+                    if board[i][j] == '.':
+                        for k in range(1, 10):
+                            if is_valid(i, j, str(k)):
+                                board[i][j] = str(k)
+                                if solve():
                                     return True
                                 board[i][j] = '.'
                         return False
+
             # When the entire board is filled in, return True
             return True
 
-        solve(board)
+        solve()

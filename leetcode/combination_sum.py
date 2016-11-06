@@ -5,14 +5,15 @@ class Solution(object):
         :type target: int
         :rtype: List[List[int]]
         """
-        def helper(remaining, path, res):
-            if remaining == 0:
-                res.add(path)
-                    
-            for c in candidates:
-                if remaining >= c:
-                    helper(remaining-c, path+(c,), res)
+        def helper(target, path, result):
+            if target == 0:
+                result.add(path)
+                return
 
-        res = set()
-        helper(target, (), res)
-        return map(list, set(tuple(sorted(path)) for path in res))
+            for c in candidates:
+                if target >= c:
+                    helper(target-c, path+(c,), result)
+
+        result = set()
+        helper(target, (), result)
+        return map(list, set(tuple(sorted(path)) for path in result))

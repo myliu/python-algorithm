@@ -12,6 +12,7 @@ class Solution(object):
         def helper(candidates, target, start, path, result):
             if target == 0:
                 result.append(path)
+                return
             
             for i in range(start, len(candidates)):
                 c = candidates[i]

@@ -4,17 +4,14 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        def swap(nums, i, j):
-            tmp = nums[i]
-            nums[i] = nums[j]
-            nums[j] = tmp
+        n = len(nums)
 
-        for i in xrange(len(nums)):
-            while nums[i] > 0 and nums[i] <= len(nums) and nums[nums[i]-1] != nums[i]:
-                swap(nums, i, nums[i]-1)
-
-        for i, num in enumerate(nums):
-            if i + 1 != num:
-                return i + 1
+        for i in range(n):
+            while nums[i] > 0 and nums[i] <= n and nums[i] != nums[nums[i]-1]:
+                j = nums[i] - 1
+                nums[i], nums[j] = nums[j], nums[i]
         
-        return len(nums) + 1
+        for i in range(n):
+            if nums[i] != i+1:
+                return i+1
+        return n + 1

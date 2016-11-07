@@ -7,8 +7,8 @@ class Solution(object):
         """
         dp = [0] * (target+1)
         dp[0] = 1
-        for target in range(1, target+1):
+        for t in range(1, target+1):
             for num in nums:
-                if target - num >= 0:
-                    dp[target] += dp[target-num]
+                if t >= num:
+                    dp[t] += dp[t-num]
         return dp[target]

@@ -1,4 +1,4 @@
-import collections
+from collections import defaultdict
 
 class Solution(object):
     def groupAnagrams(self, strs):
@@ -6,7 +6,7 @@ class Solution(object):
         :type strs: List[str]
         :rtype: List[List[str]]
         """
-        d = collections.defaultdict(list)
+        d = defaultdict(list)
         for str in strs:
-            d[tuple(sorted(str))].append(str)
-        return map(sorted, d.values())
+            d[tuple(sorted(str))] += str,
+        return d.values()

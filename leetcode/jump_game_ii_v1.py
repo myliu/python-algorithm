@@ -4,10 +4,10 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        end = reach = jumps = 0
+        last_max_jump = current_max_jump = jumps = 0
         for k, v in enumerate(nums[:-1]):
-            reach = max(reach, k+v)
-            if k == end:
-                end = reach
+            current_max_jump = max(current_max_jump, k+v)
+            if k == last_max_jump:
+                last_max_jump = current_max_jump
                 jumps += 1
         return jumps

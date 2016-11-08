@@ -10,6 +10,6 @@ class Solution(object):
 
         if n < 0:
             n = -n
-            x = 1/x
+            x = 1 / x
 
         return self.myPow(x*x, n/2) if n % 2 == 0 else x * self.myPow(x*x, n/2)

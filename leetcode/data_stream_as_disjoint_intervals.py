@@ -26,15 +26,15 @@ class SummaryRanges(object):
         """
         stack = []
         while self.intervals:
-            idx, interval = heappop(self.intervals)
+            start, interval = heappop(self.intervals)
             if not stack:
-                stack += (idx, interval),
+                stack += (start, interval),
             else:
                 _, prev = stack[-1]
                 if prev.end + 1 >= interval.start:
                     prev.end = max(prev.end, interval.end)
                 else:
-                    stack += (idx, interval),
+                    stack += (start, interval),
         self.intervals = stack
         return map(lambda x: x[1], stack)
 

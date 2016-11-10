@@ -11,19 +11,15 @@ class Solution(object):
         :type newInterval: Interval
         :rtype: List[Interval]
         """
-        res = []
+        result = []
+
         i = 0
         while i < len(intervals) and intervals[i].end < newInterval.start:
-            res.append(intervals[i])
+            result += intervals[i],
             i += 1
 
         while i < len(intervals) and intervals[i].start <= newInterval.end:
             newInterval = Interval(min(intervals[i].start, newInterval.start), max(intervals[i].end, newInterval.end))
             i += 1
-        res.append(newInterval)
 
-        while i < len(intervals) and intervals[i].start > newInterval.end:
-            res.append(intervals[i])
-            i += 1
-
-        return res
+        return result + [newInterval] + intervals[i:]

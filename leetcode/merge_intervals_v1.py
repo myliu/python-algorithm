@@ -4,7 +4,7 @@
 #         self.start = s
 #         self.end = e
 
-import operator
+from operator import attrgetter
 
 class Solution(object):
     def merge(self, intervals):
@@ -12,11 +12,15 @@ class Solution(object):
         :type intervals: List[Interval]
         :rtype: List[Interval]
         """
-        out = []
-        intervals.sort(key=operator.attrgetter('start'))
-        for i in intervals:
-            if out and i.start <= out[-1].end:
-                out[-1].end = max(out[-1].end, i.end)
+        stack = []
+        intervals.sort(key=attrgetter('start'))
+        for interval in intervals:
+            if not stack:
+                stack.append(interval)
             else:
-                out.append(i)
-        return out
+                prev = stack[-1]
+                if interval.start <= prev.end:
+                    prev.end = max(prev.end, interval.end)
+                else:
+                    stack.append(interval)
+        return stack

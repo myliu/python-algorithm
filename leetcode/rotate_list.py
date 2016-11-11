@@ -12,14 +12,14 @@ class Solution(object):
         :rtype: ListNode
         """
         if not head:
-            return head
+            return None
 
         current, count = head, 1
         while current.next:
             current = current.next
             count += 1
 
-        # make a circle
+        # Make a circle
         current.next = head
         
         for i in range(count-k%count):

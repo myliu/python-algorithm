@@ -8,8 +8,8 @@ class Solution(object):
         stack = []
         for token in tokens:
             if token not in ('', '.', '..'):
-                stack.append(token)
-            elif token == '..' and stack:
+                stack += token,
+            elif stack and token == '..':
                 stack.pop()
 
         return '/' + '/'.join(stack)

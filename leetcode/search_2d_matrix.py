@@ -5,23 +5,17 @@ class Solution(object):
         :type target: int
         :rtype: bool
         """
-        if not matrix or target is None:
-            return False
+        m, n = len(matrix), len(matrix[0])
+        lo, hi = 0, m * n - 1
 
-        row = len(matrix)
-        col = len(matrix[0])
-
-        low, high = 0, row * col - 1
-
-        while low <= high:
-            mid = low + (high - low) / 2
-            num = matrix[mid/col][mid%col]
-            
+        while lo <= hi:
+            mid = (lo + hi) / 2
+            num = matrix[mid/n][mid%n]
             if target == num:
                 return True
             elif target > num:
-                low = mid + 1
+                lo = mid + 1
             else:
-                high = mid - 1
+                hi = mid - 1
 
         return False

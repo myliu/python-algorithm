@@ -5,11 +5,9 @@ class Solution(object):
         :type target: int
         :rtype: bool
         """
-        if not matrix or target is None:
-            return False
-
-        row, col = 0, len(matrix[0]) - 1
-        while row < len(matrix) and col >= 0:
+        m, n = len(matrix), len(matrix[0])
+        row, col = 0, n - 1
+        while row < m and col >= 0:
             if target == matrix[row][col]:
                 return True
             elif target > matrix[row][col]:

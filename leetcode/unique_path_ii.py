@@ -7,8 +7,8 @@ class Solution(object):
         dp = [0] * len(obstacleGrid[0])
         dp[0] = 1
         for row in obstacleGrid:
-            for i, c in enumerate(row):
-                if c == 1:
+            for i, cell in enumerate(row):
+                if cell == 1:
                     dp[i] = 0
                 elif i > 0:
                     dp[i] += dp[i-1]

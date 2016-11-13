@@ -9,17 +9,20 @@ class Solution(object):
         """
         need = Counter(t)
         missing = len(t)
-        i = I = J = 0
-        for j, c in enumerate(s, 1):
-            missing -= need[c] > 0
-            need[c] -= 1
+        # [left:right] are the running window boundary
+        # [start:end) are the minimal window boundary
+        left = right = start = end = 0
+        while right < len(s):
+            missing -= 1 if need[s[right]] > 0 else 0
+            need[s[right]] -= 1
             if not missing:
-                while i < j and need[s[i]] < 0:
-                    need[s[i]] += 1
-                    i += 1
-                if not J or j - i <= J - I:
-                    I, J = i, j
-        return s[I:J]
+                while left < right and need[s[left]] < 0:
+                    need[s[left]] += 1
+                    left += 1
+                if not end or right + 1 - left < end - start:
+                    start, end = left, right + 1
+            right += 1
+        return s[start:end]
 
 if __name__ == '__main__':
     s = Solution()

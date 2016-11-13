@@ -5,16 +5,15 @@ class Solution(object):
         :type k: int
         :rtype: List[List[int]]
         """
-        def dfs(nums, i, tmp, res, k):
-            if len(tmp) == k:
-                res.append(list(tmp))
-                return
-
-            while i < len(nums):
-                dfs(nums, i+1, tmp+(nums[i],), res, k)
-                i += 1
-
-        nums = range(1, n+1)    
-        res = []
-        dfs(nums, 0, (), res, k)
-        return res
+        result = []
+        self.dfs(range(1, n+1), k, 0, (), result)
+        return result
+    
+    def dfs(self, nums, k, i, tmp, result):
+        if len(tmp) == k:
+            result += list(tmp),
+            return
+        
+        while i < len(nums):
+            self.dfs(nums, k, i+1, tmp+(nums[i],), result)
+            i += 1

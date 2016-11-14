@@ -5,17 +5,17 @@ class Solution(object):
         :type word: str
         :rtype: bool
         """
-        def helper(board, x, y, word, i):
-            if i == len(word):
-                return True
+        return any(self.dfs(board, i, j, word, 0) for i in range(len(board)) for j in range(len(board[0])))
 
-            if x < 0 or y < 0 or x >= len(board) or y >= len(board[0]) or board[x][y] != word[i]:
-                return False
+    def dfs(self, board, x, y, word, start):
+        if start == len(word):
+            return True
 
-            tmp = board[x][y]
-            board[x][y] = '*'
-            res = helper(board, x-1, y, word, i+1) or helper(board, x+1, y, word, i+1) or helper(board, x, y-1, word, i+1) or helper(board, x, y+1, word, i+1)
-            board[x][y] = tmp
-            return res
+        if x < 0 or x >= len(board) or y < 0 or y >= len(board[0]) or board[x][y] != word[start]:
+            return False
 
-        return any(helper(board, i, j, word, 0) for j in xrange(len(board[0])) for i in xrange(len(board)))
+        board[x][y], tmp = '*', board[x][y]
+        directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+        result = any(self.dfs(board, x + dx, y + dy, word, start+1) for dx, dy in directions)
+        board[x][y] = tmp
+        return result

@@ -1,4 +1,6 @@
 class Solution(object):
+
+    # https://discuss.leetcode.com/topic/20801/extremely-simple-java-solution
     def maximalSquare(self, matrix):
         """
         :type matrix: List[List[str]]

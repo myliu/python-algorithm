@@ -1,4 +1,6 @@
 class Solution(object):
+
+    # https://discuss.leetcode.com/topic/6650/share-my-dp-solution
     def maximalRectangle(self, matrix):
         """
         :type matrix: List[List[str]]

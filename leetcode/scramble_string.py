@@ -1,4 +1,4 @@
-import collections
+from collections import Counter
 
 class Solution(object):
     def isScramble(self, s1, s2):
@@ -10,8 +10,9 @@ class Solution(object):
         if s1 == s2:
             return True
 
-        c1 = collections.Counter(s1)
-        c2 = collections.Counter(s2)
+        c1 = Counter(s1)
+        c2 = Counter(s2)
+
         if c1 != c2:
             return False
 
@@ -19,6 +20,6 @@ class Solution(object):
         for i in range(1, n):
             if self.isScramble(s1[:i], s2[:i]) and self.isScramble(s1[i:], s2[i:]):
                 return True
-            if self.isScramble(s1[:i], s2[(n-i):]) and self.isScramble(s1[i:], s2[:(n-i)]):
+            if self.isScramble(s1[:i], s2[n-i:]) and self.isScramble(s1[i:], s2[:n-i]):
                 return True
         return False

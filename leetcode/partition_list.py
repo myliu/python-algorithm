@@ -11,16 +11,18 @@ class Solution(object):
         :type x: int
         :rtype: ListNode
         """
-        dummy1 = cur1 = ListNode(0)
-        dummy2 = cur2 = ListNode(0)
+        dummy1 = curr1 = ListNode(0)
+        dummy2 = curr2 = ListNode(0)
+
         while head:
             if head.val < x:
-                cur1.next = head
-                cur1 = head
+                curr1.next = head
+                curr1 = head
             else:
-                cur2.next = head
-                cur2 = head
+                curr2.next = head
+                curr2 = head
             head = head.next
-        cur2.next = None
-        cur1.next = dummy2.next
+
+        curr2.next = None
+        curr1.next = dummy2.next
         return dummy1.next

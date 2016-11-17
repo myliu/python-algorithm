@@ -6,7 +6,7 @@
 #         self.right = None
 
 class Solution(object):
-    def isValidBST(self, root, less_than=float('inf'), greater_than=float('-inf')):
+    def isValidBST(self, root, upper_bound=float('inf'), lower_bound=float('-inf')):
         """
         :type root: TreeNode
         :rtype: bool
@@ -14,8 +14,8 @@ class Solution(object):
         if not root:
             return True
 
-        if root.val <= greater_than or root.val >= less_than:
+        if root.val <= lower_bound or root.val >= upper_bound:
             return False
 
-        return self.isValidBST(root.left, min(less_than, root.val), greater_than) and \
-               self.isValidBST(root.right, less_than, max(greater_than, root.val))
+        return self.isValidBST(root.left, min(upper_bound, root.val), lower_bound) and \
+               self.isValidBST(root.right, upper_bound, max(lower_bound, root.val))

@@ -18,9 +18,12 @@ class Solution(object):
             return node
 
         def trees(first, last):
-            return [node(root, left, right)
-                    for root in range(first, last+1)
-                    for left in trees(first, root-1)
-                    for right in trees(root+1, last)] or [None]
+            if first > last:
+                return [None]
+
+            return [node(root_val, left, right)
+                    for root_val in range(first, last+1)
+                    for left in trees(first, root_val-1)
+                    for right in trees(root_val+1, last)]
 
         return trees(1, n) if n != 0 else []

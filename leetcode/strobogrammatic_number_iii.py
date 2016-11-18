@@ -5,24 +5,21 @@ class Solution(object):
         :type high: str
         :rtype: int
         """
-        count = [0]
         pairs = [('0', '0'), ('1', '1'), ('8', '8'), ('6', '9'), ('9', '6')]
 
         def dfs(low, high, tmp, left, right):
             if left > right:
-                s = int(''.join(tmp))
-                if s < int(low) or s > int(high):
-                    return
-                count[0] += 1
-                return
+                num = int(''.join(tmp))
+                return 1 if int(low) <= num <= int(high) else 0
 
+            count = 0
             for m, n in pairs:
                 tmp[left], tmp[right] = m, n
-                if len(tmp) != 1 and tmp[0] == '0':
-                    continue
-                if (left < right) or (left == right and m == n):
-                    dfs(low, high, tmp, left+1, right-1)
+                if len(tmp) > 1 and tmp[0] == '0' or \
+                   left == right and m != n:
+                       continue
+                count += dfs(low, high, tmp, left+1, right-1)
+            return count
 
-        for i in xrange(len(low), len(high)+1):
-            dfs(low, high, [None]*i, 0, i-1)
-        return count[0]
+        return sum(dfs(low, high, [None]*i, 0, i-1)
+                   for i in range(len(low), len(high)+1))

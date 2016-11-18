@@ -6,11 +6,11 @@
 #         self.right = None
 
 class Solution(object):
-
+    
     def __init__(self):
         self.first = None
         self.second = None
-        self.prev = TreeNode(-float("inf"))
+        self.prev = TreeNode(float('-inf'))
 
 
     def recoverTree(self, root):
@@ -19,9 +19,7 @@ class Solution(object):
         :rtype: void Do not return anything, modify root in-place instead.
         """
         self.traverse(root)
-        tmp = self.first.val
-        self.first.val = self.second.val
-        self.second.val = tmp
+        self.first.val, self.second.val = self.second.val, self.first.val
 
 
     def traverse(self, root):
@@ -30,10 +28,10 @@ class Solution(object):
 
         self.traverse(root.left)
 
-        if not self.first and self.prev.val > root.val:
+        if not self.first and root.val < self.prev.val:
             self.first = self.prev
 
-        if self.first and self.prev.val > root.val:
+        if root.val < self.prev.val:
             self.second = root
 
         self.prev = root

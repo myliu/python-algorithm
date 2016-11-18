@@ -1,24 +1,27 @@
-class Solution:
-
+class Solution(object):
+    
     def __init__(self):
         self.cache = {}
 
-    # @param s, a string
-    # @param dict, a set of string
-    # @return a boolean
-    def wordBreak(self, s, dict):
-        if s in dict:
+    def wordBreak(self, s, wordDict):
+        """
+        :type s: str
+        :type wordDict: Set[str]
+        :rtype: bool
+        """
+        cache = self.cache
+
+        if s in wordDict:
             return True
 
-        if s in self.cache:
-            return self.cache[s]
+        if s in cache:
+            return cache[s]
 
-        for i in range(len(s)):
-            if s[:i+1] in dict:
-                if self.wordBreak(s[i+1:], dict):
-                    self.cache[s] = True
-                    return True
-        self.cache[s] = False
+        for i in range(1, len(s)):
+            if s[:i] in wordDict and self.wordBreak(s[i:], wordDict):
+                cache[s] = True
+                return True
+        cache[s] = False
         return False
 
 if __name__ == '__main__':

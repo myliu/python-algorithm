@@ -12,12 +12,10 @@ class Solution(object):
             if not s:
                 return ['']
 
-            results = []
-            for word in wordDict:
-                if s.startswith(word):
-                    for r in dfs(s[len(word):], wordDict, cache):
-                        result = word + (' ' if r else '') + r
-                        results.append(result)
+            results = [word + (' ' if result else '') + result
+                       for word in wordDict if s.startswith(word)
+                       for result in dfs(s[len(word):], wordDict, cache)]
+
             cache[s] = results
             return results
 

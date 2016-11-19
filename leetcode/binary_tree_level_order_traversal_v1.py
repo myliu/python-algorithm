@@ -1,4 +1,4 @@
-import collections
+from collections import deque
 
 # Definition for a  binary tree node
 class TreeNode:
@@ -16,24 +16,24 @@ class Solution:
         if root == None:
             return result
 
-        q = collections.deque()
-        q.append(root)
+        q = deque()
+        q += root,
 
-        while len(q) != 0:
-            li = []
+        while q:
+            curr_level = []
             size = len(q)
 
             for i in range(size):
                 node = q.popleft()
-                li.append(node.val)
+                curr_level += node.val,
 
-                if node.left != None:
-                    q.append(node.left)
+                if node.left:
+                    q += node.left,
 
-                if node.right != None:
-                    q.append(node.right)
+                if node.right:
+                    q += node.right,
 
-            result.append(li)
+            result += curr_level,
 
         return result
 

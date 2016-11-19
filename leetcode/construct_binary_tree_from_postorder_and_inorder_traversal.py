@@ -12,13 +12,15 @@ class Solution(object):
         :type postorder: List[int]
         :rtype: TreeNode
         """
-        def helper(post_start, in_start, in_end, inorder, postorder):
-            if post_start < 0 or in_start > in_end:
+        def helper(post_end, in_start, in_end, inorder, postorder):
+            if post_end < 0 or in_start > in_end:
                 return None
-            root = TreeNode(postorder[post_start])
-            in_mid = inorder.index(postorder[post_start])
-            root.left = helper(post_start-1-(in_end-in_mid), in_start, in_mid-1, inorder, postorder)
-            root.right = helper(post_start-1, in_mid+1, in_end, inorder, postorder)
+
+            val = postorder[post_end]
+            i = inorder.index(val)
+            root = TreeNode(val)
+            root.left = helper(post_end-1-(in_end-i), in_start, i-1, inorder, postorder)
+            root.right = helper(post_end-1, i+1, in_end, inorder, postorder)
             return root
 
         return helper(len(postorder)-1, 0, len(inorder)-1, inorder, postorder)

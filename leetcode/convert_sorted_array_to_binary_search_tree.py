@@ -15,9 +15,6 @@ class Solution(object):
             if left > right:
                 return None
 
-            if left == right:
-                return TreeNode(nums[left])
-
             mid = left + (right-left)/2
             root = TreeNode(nums[mid])
             root.left = dfs(nums, left, mid-1)

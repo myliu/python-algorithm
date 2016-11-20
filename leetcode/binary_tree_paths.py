@@ -9,18 +9,18 @@ class Solution:
     # @param {TreeNode} root
     # @return {string[]}
     def binaryTreePaths(self, root):
-        def dfs(root, tmp, results):
+        def dfs(root, tmp, result):
             if not root:
                 return
 
             if not root.left and not root.right:
-                current = '->'.join(map(str, tmp+[root.val]))
-                results.append(current)
+                tmp += root.val,
+                result += '->'.join(map(str,tmp)),
                 return
-            
-            dfs(root.left, tmp+[root.val], results)
-            dfs(root.right, tmp+[root.val], results)
 
-        results = []
-        dfs(root, [], results)
-        return results
+            dfs(root.left, tmp+[root.val], result)
+            dfs(root.right, tmp+[root.val], result)
+
+        result = []
+        dfs(root, [], result)
+        return result

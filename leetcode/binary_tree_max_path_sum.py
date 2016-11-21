@@ -8,7 +8,7 @@
 class Solution(object):
     
     def __init__(self):
-        self.max_sum = -float("inf")
+        self.max_sum = float("-inf")
 
 
     def maxPathSum(self, root):

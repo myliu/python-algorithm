@@ -18,6 +18,5 @@ class Solution(object):
             pre = dfs(root.left, pre)
             root.right = pre
             root.left = None
-            pre = root
-            return pre
+            return root
         dfs(root, None)

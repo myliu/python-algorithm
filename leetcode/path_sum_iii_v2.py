@@ -32,8 +32,6 @@ class Solution(object):
             prefix_sum_count[prefix_sum] -= 1
             return count
 
-        if not root:
-            return 0
         prefix_sum_count = defaultdict(int)
         prefix_sum_count[0] = 1
         return dfs(root, 0, sum, prefix_sum_count)

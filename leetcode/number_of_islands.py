@@ -10,7 +10,7 @@ class Solution(object):
             return False
 
         def find(node):
-            if nodes[node] != node:
+            if node != nodes[node]:
                 nodes[node] = find(nodes[node])
             return nodes[node]
 
@@ -22,16 +22,15 @@ class Solution(object):
 
         nodes = {}
         edges = []
-        directions = [(0, 1), (1, 0)]
         for i in range(len(grid)):
             for j in range(len(grid[0])):
                 if grid[i][j] == '1':
                     # Initialize nodes where each node represents a disjoint set
                     nodes[(i, j)] = (i, j)
-                    for m, n in directions:
-                        x, y = i + m, j + n
+                    for dx, dy in [(0, 1), (1, 0)]:
+                        x, y = i + dx, j + dy
                         if is_valid(x, y):
-                            edges.append(((i, j), (x, y)))
+                            edges += [(i, j), (x, y)],
 
         for node1, node2 in edges:
             union(node1, node2)

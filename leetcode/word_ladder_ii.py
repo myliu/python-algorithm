@@ -3,10 +3,6 @@ from string import ascii_lowercase
 
 class Solution(object):
 
-    def __init__(self):
-        self.adjacency_map = defaultdict(list)
-        self.results = []
-
     def findLadders(self, beginWord, endWord, wordlist):
         """
         :type beginWord: str
@@ -21,13 +17,16 @@ class Solution(object):
 
         wordlist.add(endWord)
 
+        adjacency_map = defaultdict(set)
+
         ladder = defaultdict(lambda: float('inf'))
         ladder[beginWord] = 0
 
         # min_step is important here since it is possible there are multiple solutions
         min_step = float('inf')
+
         q = deque()
-        q.append(beginWord)
+        q += beginWord,
         while q:
             word = q.popleft()
             step = ladder[word] + 1
@@ -52,24 +51,25 @@ class Solution(object):
                         When we reach "cog" for the second time, step is the same as ladder[new_word].
                         """
 
-                        self.adjacency_map[new_word].append(word)
+                        adjacency_map[word].add(new_word)
 
                         if new_word == endWord:
                             min_step = step
 
-        self.dfs(beginWord, endWord, tuple())
-        return self.results
+        results = []
+        self.dfs(beginWord, endWord, [], results, adjacency_map)
+        return results
 
-    def dfs(self, begin, end, result):
+    def dfs(self, begin, end, tmp, results, adjacency_map):
         if begin == end:
-            self.results.append(list((begin,) + result))
+            results += tmp + [end],
             return
 
-        for word in self.adjacency_map[end]:
-            self.dfs(begin, word, (end,) + result)
+        for new_begin in adjacency_map[begin]:
+            self.dfs(new_begin, end, tmp + [begin], results, adjacency_map)
 
 
 if __name__ == '__main__':
     s = Solution()
     wordlist = set(["hot","dot","dog","lot","log"])
-    s.findLadders('hit', 'cog', wordlist)
+    print s.findLadders('hit', 'cog', wordlist)

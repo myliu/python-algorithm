@@ -11,16 +11,15 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        def dfs(root, path, sums):
+        def dfs(root, tmp):
             if not root:
-                return sums
+                return 0
 
-            current = path + str(root.val)
+            curr = tmp + str(root.val)
 
             if not root.left and not root.right:
-                sums += int(current)
-                return sums
+                return int(curr)
 
-            return sums + dfs(root.left, current, sums) + dfs(root.right, current, sums)
+            return dfs(root.left, curr) + dfs(root.right, curr)
 
-        return dfs(root, '', 0)
+        return dfs(root, '')

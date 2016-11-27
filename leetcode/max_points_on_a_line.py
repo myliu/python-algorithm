@@ -4,7 +4,7 @@
 #         self.x = a
 #         self.y = b
 
-import collections
+from collections import defaultdict
 
 class Solution(object):
     def maxPoints(self, points):
@@ -12,26 +12,30 @@ class Solution(object):
         :type points: List[Point]
         :rtype: int
         """
-        if len(points) <= 2:
-            return len(points)
+        n = len(points)
 
-        result = 0
+        if n <= 2:
+            return n
 
-        for i in xrange(len(points)):
+        _max = 0
+        for i in range(n):
             # Key: Slope
             # Value: Count
-            d = collections.defaultdict(int)
+            slopes = defaultdict(int)
             overlap = 0
 
-            for j in xrange(i+1, len(points)):
-                dx, dy = points[i].x - points[j].x, points[i].y - points[j].y
-                if dx == 0 and dy == 0:
+            for j in range(i+1, n):
+                pi, pj = points[i], points[j]
+                dx, dy = pi.x-pj.x, pi.y-pj.y
+
+                if not dx and not dy:
                     overlap += 1
                     continue
-                slope = dy * 1.0 / dx if dx != 0 else 'infinity'
-                d[slope] += 1
 
-            curmax = max(d.values()) if d else 0
-            result = max(result, curmax + overlap + 1)
+                slope = dy * 1.0 / dx if dx else float('inf')
+                slopes[slope] += 1
 
-        return result
+            running_max = max(slopes.values()) if slopes else 0
+            _max = max(_max, running_max + overlap + 1)
+
+        return _max

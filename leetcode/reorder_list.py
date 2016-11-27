@@ -38,5 +38,3 @@ class Solution(object):
         while second.next:
             first.next, first = second, first.next
             second.next, second = first, second.next
-
-        return

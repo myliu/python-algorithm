@@ -11,17 +11,17 @@ class Solution(object):
         :type head: RandomListNode
         :rtype: RandomListNode
         """
-        def dfs(head, list_dict):
+        def dfs(head, graph):
             if not head:
                 return None
 
-            if head.label in list_dict:
-                return list_dict[head.label]
+            if head.label in graph:
+                return graph[head.label]
 
             clone = RandomListNode(head.label)
-            list_dict[head.label] = clone
-            clone.next = dfs(head.next, list_dict)
-            clone.random = dfs(head.random, list_dict)
+            graph[clone.label] = clone
+            clone.next = dfs(head.next, graph)
+            clone.random = dfs(head.random, graph)
             return clone
 
         return dfs(head, {})

@@ -10,6 +10,7 @@ class Solution(object):
             diff ^= num
 
         # diff is the last set bit
+        # Note: This technique is also used in Binary Index Tree
         diff &= -diff
 
         num0 = num1 = 0
@@ -18,4 +19,5 @@ class Solution(object):
                 num0 ^= num
             else:
                 num1 ^= num
+
         return [num0, num1]

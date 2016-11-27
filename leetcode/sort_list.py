@@ -15,28 +15,28 @@ class Solution(object):
 
         slow, fast = head, head.next.next
         while fast and fast.next:
-            slow, fast = slow.next, fast.next.next
+            slow = slow.next
+            fast = fast.next.next
 
         head2 = slow.next
         slow.next = None
-
         return self.merge(self.sortList(head), self.sortList(head2))
 
-
     def merge(self, node1, node2):
-        dummy = cur = ListNode(0)
+        curr = dummy = ListNode(0)
+
         while node1 and node2:
             if node1.val < node2.val:
-                cur.next = node1
+                curr.next = node1
                 node1 = node1.next
             else:
-                cur.next = node2
+                curr.next = node2
                 node2 = node2.next
-            cur = cur.next
+            curr = curr.next
 
         if node1:
-            cur.next = node1
+            curr.next = node1
         else:
-            cur.next = node2
+            curr.next = node2
 
         return dummy.next

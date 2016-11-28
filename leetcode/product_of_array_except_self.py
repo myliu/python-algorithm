@@ -4,18 +4,19 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-        output = [1] * len(nums)
+        n = len(nums)
+        result = [1] * n
 
         # left to right scan
         prev = 1
-        for i in xrange(1, len(nums)):
-            prev = prev * nums[i-1]
-            output[i] = prev
+        for i in range(1, n):
+            prev *= nums[i-1]
+            result[i] *= prev
 
         # right to left scan
         prev = 1
-        for i in xrange(len(nums)-2, -1, -1):
-            prev = prev * nums[i+1]
-            output[i] *= prev
+        for i in range(n-2, -1, -1):
+            prev *= nums[i+1]
+            result[i] *= prev
 
-        return output
+        return result

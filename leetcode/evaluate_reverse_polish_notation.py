@@ -6,16 +6,18 @@ class Solution(object):
         """
         stack = []
         for token in tokens:
+            if token not in ('+', '-', '*', '/'):
+                stack += int(token),
+                continue
+
+            operand2 = stack.pop()
+            operand1 = stack.pop()
             if token == '+':
-                stack.append(stack.pop() + stack.pop())
+                stack.append(operand1+operand2)
             elif token == '-':
-                stack.append(0 - stack.pop() + stack.pop())
+                stack.append(operand1-operand2)
             elif token == '*':
-                stack.append(stack.pop() * stack.pop())            
+                stack.append(operand1*operand2)
             elif token == '/':
-                op2 = stack.pop()
-                op1 = stack.pop()
-                stack.append(int(float(op1) / op2))
-            else:
-                stack.append(int(token))
+                stack.append(int(operand1*1.0/operand2))
         return stack.pop()

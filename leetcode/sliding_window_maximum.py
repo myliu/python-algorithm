@@ -1,4 +1,4 @@
-import collections
+from collections import deque
 
 class Solution(object):
     def maxSlidingWindow(self, nums, k):
@@ -7,23 +7,24 @@ class Solution(object):
         :type k: int
         :rtype: List[int]
         """
-        d = collections.deque()
-        out = []
+        n = len(nums)
+        q = deque()
+        result = []
 
-        for i, n in enumerate(nums):
-            # Pop all elements that are smaller than the newest element 'n'
-            # This will ensure the d[0] will always be the largest element in the deque
-            while d and nums[d[-1]] < n:
-                d.pop()
+        for i in range(n):
+            # Pop all elements that are smaller than the newest element nums[i]
+            # This will ensure the q[0] will always be the largest element in the deque
+            while q and nums[q[-1]] < nums[i]:
+                q.pop()
 
-            d += i,
+            q += i,
 
             # The deque will hold a max of k elements, so we should remove the first element when the limit is hit
-            if d[0] == i - k:
-                d.popleft()
+            if i - q[0] == k:
+                q.popleft()
 
-            # Start adding to the output list as soon as the window size is satisfied
+            # Start adding to the result as soon as the window size is satisfied
             if i >= k - 1:
-                out += nums[d[0]],
+                result += nums[q[0]],
 
-        return out
+        return result

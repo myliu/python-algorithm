@@ -4,6 +4,8 @@
 #         self.val = x
 #         self.next = None
 
+import gc
+
 class Solution(object):
     def getIntersectionNode(self, headA, headB):
         """
@@ -13,6 +15,7 @@ class Solution(object):
         if not headA or not headB:
             return None
 
+        gc.collect()
         a, b = headA, headB
         while a != b:
             a = a.next if a else headB

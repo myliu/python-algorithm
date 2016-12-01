@@ -18,6 +18,8 @@ class Solution(object):
 
         left = self.lowestCommonAncestor(root.left, p, q)
         right = self.lowestCommonAncestor(root.right, p, q)
-        if left != None and right != None:
+
+        if left and right:
             return root
-        return left if left != None else right
+
+        return left if left else right

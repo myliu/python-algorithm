@@ -4,11 +4,11 @@ class Solution(object):
         :type n: int
         :rtype: List[List[int]]
         """
-        def factors(n, i, tmp, results):
+        def factors(n, i, tmp, result):
             while i * i <= n:
                 if n % i == 0:
-                    results += tmp + [i, n/i],
-                    factors(n/i, i, tmp+[i], results)
+                    result += tmp + [i, n/i],
+                    factors(n/i, i, tmp+[i], result)
                 i += 1
-            return results
+            return result
         return factors(n, 2, [], [])

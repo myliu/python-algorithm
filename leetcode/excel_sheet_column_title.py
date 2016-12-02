@@ -4,9 +4,10 @@ class Solution(object):
         :type n: int
         :rtype: str
         """
-        s = ''
-        while n > 0:
+        result = ''
+        while n:
             n -= 1
-            s = chr(ord('A') + n%26) + s
+            remainder = n % 26
+            result = chr(ord('A') + remainder) + result
             n /= 26
-        return s
+        return result

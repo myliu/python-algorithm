@@ -8,9 +8,8 @@ class Solution(object):
         if not numerator:
             return '0'
 
-        d = {}
         fraction = ''
-        if (numerator < 0) != (denominator < 0):
+        if (numerator > 0) != (denominator > 0):
             fraction += '-'
 
         numerator = abs(numerator)
@@ -22,13 +21,15 @@ class Solution(object):
             return fraction
 
         fraction += '.'
+
+        d = {}
         while remainder:
             if remainder in d:
-                fraction = fraction[:d[remainder]] + '(' + fraction[d[remainder]:]
-                fraction += ')'
-                return fraction
+                i = d[remainder]
+                return fraction[:i] + '(' + fraction[i:] + ')'
+ 
             d[remainder] = len(fraction)
             remainder *= 10
             fraction += str(remainder / denominator)
-            remainder = remainder % denominator
+            remainder %= denominator
         return fraction

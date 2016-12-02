@@ -1,16 +1,19 @@
-class Solution:
-    # @param version1, a string
-    # @param version2, a string
-    # @return an integer
+class Solution(object):
     def compareVersion(self, version1, version2):
-        list1 = version1.split('.')
-        list2 = version2.split('.')
-        for i in range(max(len(list1), len(list2))):
-            m = int(list1[i]) if i < len(list1) else 0
-            n = int(list2[i]) if i < len(list2) else 0
-            if m > n:
+        """
+        :type version1: str
+        :type version2: str
+        :rtype: int
+        """
+        l1 = version1.split('.')
+        l2 = version2.split('.')
+        m, n = len(l1), len(l2)
+        for i in range(max(m, n)):
+            v1 = int(l1[i]) if i < m else 0
+            v2 = int(l2[i]) if i < n else 0
+            if v1 > v2:
                 return 1
-            if m < n:
+            elif v1 < v2:
                 return -1
         return 0
 

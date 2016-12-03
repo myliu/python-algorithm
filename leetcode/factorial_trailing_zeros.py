@@ -1,14 +1,14 @@
-import math
-
-class Solution:
-    # @return an integer
+class Solution(object):
     def trailingZeroes(self, n):
-        m = 0
-        i = 1
-        while int(math.pow(5, i)) <= n:
-            m += n/int(math.pow(5, i))
-            i += 1
-        return m
+        """
+        :type n: int
+        :rtype: int
+        """
+        result = 0
+        while n >= 5:
+            result += n / 5
+            n /= 5
+        return result
 
 
 if __name__ == '__main__':

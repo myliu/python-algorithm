@@ -5,7 +5,7 @@ class Solution(object):
         :rtype: int
         """
         m, n = len(dungeon), len(dungeon[0])
-        dp = [[float('inf') for j in range(n)] for i in range(m)]
+        dp = [[float('inf') for _ in range(n)] for _ in range(m)]
         for i in range(m-1, -1, -1):
             for j in range(n-1, -1, -1):
                 if i == m-1 and j == n-1:

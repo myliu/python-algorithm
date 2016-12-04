@@ -1,12 +1,13 @@
-class Solution:
-    # @param nums, a list of integer
-    # @param k, num of steps
-    # @return nothing, please modify the nums list in-place.
+class Solution(object):
     def rotate(self, nums, k):
-        while k > 0:
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+        for _ in range(k):
             nums.insert(0, nums[-1])
-            nums.pop(-1)
-            k -= 1
+            nums.pop()
 
 if __name__ == '__main__':
     s = Solution()

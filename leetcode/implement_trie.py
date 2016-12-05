@@ -1,4 +1,4 @@
-import collections
+from collections import defaultdict
 
 class TrieNode(object):
     def __init__(self):
@@ -6,7 +6,7 @@ class TrieNode(object):
         Initialize your data structure here.
         """
         self.is_word = False
-        self.children = collections.defaultdict(TrieNode)
+        self.children = defaultdict(TrieNode)
 
 
 class Trie(object):
@@ -20,11 +20,10 @@ class Trie(object):
         :type word: str
         :rtype: void
         """
-        current = self.root
-        for i in word:
-            current = current.children[i]
-        current.is_word = True
-
+        curr = self.root
+        for c in word:
+            curr = curr.children[c]
+        curr.is_word = True
 
     def search(self, word):
         """
@@ -32,13 +31,12 @@ class Trie(object):
         :type word: str
         :rtype: bool
         """
-        current = self.root
-        for i in word:
-            if not i in current.children:
+        curr = self.root
+        for c in word:
+            if c not in curr.children:
                 return False
-            current = current.children[i]
-        return current.is_word
-
+            curr = curr.children[c]
+        return curr.is_word
 
     def startsWith(self, prefix):
         """
@@ -47,11 +45,11 @@ class Trie(object):
         :type prefix: str
         :rtype: bool
         """
-        current = self.root
+        curr = self.root
         for i in prefix:
-            if not i in current.children:
+            if c not in curr.children:
                 return False
-            current = current.children[i]
+            curr = curr.children[c]
         return True
 
 

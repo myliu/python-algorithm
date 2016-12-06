@@ -5,7 +5,7 @@ class WordDictionary(object):
         """
         initialize your data structure here.
         """
-        self.cache = defaultdict(list)
+        self.d = defaultdict(set)
 
     def addWord(self, word):
         """
@@ -13,7 +13,7 @@ class WordDictionary(object):
         :type word: str
         :rtype: void
         """
-        self.cache[len(word)].append(word)
+        self.d[len(word)].add(word)
 
     def search(self, word):
         """
@@ -22,12 +22,9 @@ class WordDictionary(object):
         :type word: str
         :rtype: bool
         """
-        if not word:
-            return False
-
-        for w in self.cache[len(word)]:
-            for i, v in enumerate(word):
-                if v != '.' and v != w[i]:
+        for w in self.d[len(word)]:
+            for i, c in enumerate(word):
+                if c != '.' and c != w[i]:
                     break
             else:
                 return True

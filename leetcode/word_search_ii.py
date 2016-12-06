@@ -1,11 +1,11 @@
-class TrieNode(object):
+from collections import defaultdict
 
+class TrieNode(object):
     def __init__(self):
-        self.children = {}
         self.word = None
+        self.children = defaultdict(TrieNode)
 
 class Solution(object):
-
     def findWords(self, board, words):
         """
         :type board: List[List[str]]
@@ -13,42 +13,38 @@ class Solution(object):
         :rtype: List[str]
         """
         root = self.build_trie(words)
-        res = []
-        for i in xrange(len(board)):
-            for j in xrange(len(board[0])):
-                self.dfs(board, i, j, root, res)
-        return res
-
-
-    def dfs(self, board, x, y, trie, res):
-        if x < 0 or y < 0 or x >= len(board) or y >= len(board[0]):
-            return
-
-        c = board[x][y]
-
-        if c == '*' or c not in trie.children:
-            return
-
-        child = trie.children[c]
-        if child.word is not None:
-            res.append(child.word)
-            child.word = None
-
-        board[x][y] = '*'
-        self.dfs(board, x-1, y, child, res)
-        self.dfs(board, x, y-1, child, res)
-        self.dfs(board, x+1, y, child, res)
-        self.dfs(board, x, y+1, child, res)
-        board[x][y] = c
-
+        result = []
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                self.dfs(board, i, j, root, result)
+        return result
 
     def build_trie(self, words):
         root = TrieNode()
         for word in words:
-            current = root
-            for i in word:
-                if i not in current.children:
-                    current.children[i] = TrieNode()
-                current = current.children[i]
-            current.word = word
+            curr = root
+            for c in word:
+                curr = curr.children[c]
+            curr.word = word
         return root
+
+    def dfs(self, board, i, j, node, result):
+        m, n = len(board), len(board[0])
+        
+        if i < 0 or i >= m or j < 0 or j >= n:
+            return
+
+        c = board[i][j]
+        if c == '*' or c not in node.children:
+            return
+
+        child = node.children[c]
+        if child.word:
+            result += child.word,
+            child.word = None
+
+        board[i][j] = '*'
+        directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        for dx, dy in directions:
+            self.dfs(board, i+dx, j+dy, child, result)
+        board[i][j] = c

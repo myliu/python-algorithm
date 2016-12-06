@@ -6,9 +6,8 @@ class Solution(object):
         :rtype: bool
         """
         d = {}
-        for i, n in enumerate(nums):
-            if n in d:
-                if i - d[n] <= k:
-                    return True
-            d[n] = i
+        for i, num in enumerate(nums):
+            if num in d and i - d[num] <= k:
+                return True
+            d[num] = i
         return False

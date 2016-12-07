@@ -1,4 +1,6 @@
 class Solution(object):
+
+    # https://discuss.leetcode.com/topic/27608/java-python-one-pass-solution-o-n-time-o-n-space-using-buckets
     def containsNearbyAlmostDuplicate(self, nums, k, t):
         """
         :type nums: List[int]
@@ -9,20 +11,23 @@ class Solution(object):
         if t < 0:
             return False
 
-        d = {}
+        buckets = {}
+        n = len(nums)
         w = t + 1
-        for i, n in enumerate(nums):
-            if i > k:
-                del d[nums[i-k-1]/w]
-            
-            m = n / w
-            if m in d:
+        for i, num in enumerate(nums):
+            b = num / w
+            if b in buckets:
                 return True
-            if m - 1 in d and abs(n - d[m-1]) < w:
+            if b-1 in buckets and abs(num - buckets[b-1]) <= t:
                 return True
-            if m + 1 in d and abs(n - d[m+1]) < w:
+            if b+1 in buckets and abs(num - buckets[b+1]) <= t:
                 return True
 
-            d[m] = n
+            buckets[b] = num
 
+            # Note: It is impossible that two numbers between index i-k and i are sharing the same bucket.
+            # If that is the case, we would have returned True already.
+            # Example: i = 5, k = 5, i - k = 0
+            if i >= k:
+                del buckets[nums[i-k]/w]
         return False

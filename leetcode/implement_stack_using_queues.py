@@ -7,17 +7,15 @@ class Stack(object):
         """
         self.queue = deque()
 
-
     def push(self, x):
         """
         :type x: int
         :rtype: nothing
         """
         q = self.queue
-        q.append(x)
-        for i in range(len(q)-1):
-            q.append(q.popleft())
-
+        q += x,
+        for _ in range(len(q)-1):
+            q += q.popleft(),
 
     def pop(self):
         """
@@ -25,19 +23,14 @@ class Stack(object):
         """
         self.queue.popleft()
 
-
     def top(self):
         """
         :rtype: int
         """
         return self.queue[0]
 
-
     def empty(self):
         """
         :rtype: bool
         """
-        if self.queue:
-            return False
-        else:
-            return True
+        return False if self.queue else True

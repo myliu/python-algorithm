@@ -4,23 +4,22 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        stack = []
         num, sign = 0, '+'
-        for i in xrange(len(s)):
-            c = s[i]
+        stack = []
+        for i in range(len(s)):
+            if s[i].isdigit():
+                num = num * 10 + int(s[i])
 
-            if c.isdigit():
-                num = num * 10 + int(c)
-
-            if (not c.isdigit() and c != ' ') or i == len(s) - 1:
+            if s[i] in ('+', '-', '*', '/') or i == len(s) - 1:
                 if sign == '+':
-                    stack.append(num)
+                    stack += num,
                 elif sign == '-':
-                    stack.append(-num)
+                    stack += -num,
                 elif sign == '*':
-                    stack.append(stack.pop() * num)
+                    stack += stack.pop() * num,
                 elif sign == '/':
-                    stack.append(int(float(stack.pop()) / num))
-                num, sign = 0, c
-
+                    # Cast to float is to handle the negative division case:
+                    # e.g., -3/2 = -2 and -3.0/2 = -1
+                    stack += int(float(stack.pop()) / num),
+                num, sign = 0, s[i]
         return sum(stack)

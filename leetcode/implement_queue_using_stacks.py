@@ -11,7 +11,7 @@ class Queue(object):
         :type x: int
         :rtype: nothing
         """
-        self.input.append(x)
+        self.input += x,
 
     def pop(self):
         """
@@ -26,7 +26,7 @@ class Queue(object):
         """
         if not self.output:
             while self.input:
-                self.output.append(self.input.pop())
+                self.output += self.input.pop(),
         return self.output[-1]
 
     def empty(self):

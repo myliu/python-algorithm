@@ -7,14 +7,14 @@ class Solution(object):
         if not nums:
             return []
 
-        results = []
         prev = nums[0]
-        nums.append(-1)
+        nums += float('inf'),
+        result = []
         for i in range(1, len(nums)):
             if nums[i] - nums[i-1] != 1:
                 if nums[i-1] == prev:
-                    results.append(str(prev))
+                    result += str(prev),
                 else:
-                    results.append(str(prev) + '->' + str(nums[i-1]))
+                    result += str(prev) + '->' + str(nums[i-1]),
                 prev = nums[i]
-        return results
+        return result

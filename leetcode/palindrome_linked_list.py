@@ -12,28 +12,27 @@ class Solution(object):
         """
         # Reverse the linked list till the middle point
         prev = None
-        current = fast = head
+        curr = fast = head
 
         while fast and fast.next:
             fast = fast.next.next
 
-            next = current.next
-            current.next = prev
-            prev = current
-            current = next
+            _next = curr.next
+            curr.next = prev
+            prev, curr = curr, _next
 
         # When the number of nodes is odd
         if fast:
-            forward = current.next
+            forward = curr.next
         # When the number of nodes is even
         else:
-            forward = current
+            forward = curr
 
         reverse = prev
 
         # From the middle point, compare the nodes in both directions
         while reverse and reverse.val == forward.val:
-            reverse = reverse.next
-            forward = forward.next
+            forward, reverse = forward.next, reverse.next
 
+        # This can be either `not reverse` or `not forward`
         return not reverse

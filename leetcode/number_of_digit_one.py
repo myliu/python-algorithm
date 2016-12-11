@@ -1,17 +1,19 @@
 class Solution(object):
+
+    # https://discuss.leetcode.com/topic/18054/4-lines-o-log-n-c-java-python
     def countDigitOne(self, n):
         """
         :type n: int
         :rtype: int
         """
-        ones, m = 0, 1
-        while m <= n:
-            # Case 1: The mth position is 2->9
-            ones += (n/m+8)/10 * m
-            # Case 2: The mth position is 1
-            if n/m % 10 == 1:
-                ones += n%m + 1
-            # Case 3: The mth position is 0 (no-op)
+        ones, i = 0, 1
+        while i <= n:
+            # Case 1: The ith position is 2->9
+            ones += (n/i+8)/10 * i
+            # Case 2: The ith position is 1
+            if n/i % 10 == 1:
+                ones += n%i + 1
+            # Case 3: The ith position is 0 (no-op)
 
-            m *= 10
+            i *= 10
         return ones

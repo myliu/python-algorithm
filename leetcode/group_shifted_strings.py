@@ -14,6 +14,6 @@ class Solution(object):
                 normalized = ord(c) - diff
                 if normalized < ord('a'):
                     normalized += 26
-                s += str(normalized)
-            d[s].append(string)
+                s += chr(normalized)
+            d[s] += string,
         return d.values()

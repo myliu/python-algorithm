@@ -11,7 +11,7 @@ class Solution(object):
                 return False
             while stack and stack[-1] < n:
                 minimum = stack.pop()
-            stack.append(n)
+            stack += n,
         return True
         
 """

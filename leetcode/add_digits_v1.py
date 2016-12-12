@@ -7,9 +7,9 @@ class Solution(object):
         if num / 10 < 1:
             return num
 
-        next = 0
+        _next = 0
         while num:
-            next += num % 10
+            _next += num % 10
             num /= 10
 
-        return self.addDigits(next)
+        return self.addDigits(_next)

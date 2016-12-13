@@ -6,7 +6,7 @@ class Codec:
         :type strs: List[str]
         :rtype: str
         """
-        return ''.join((s.replace('|', '||') + ' | ' for s in strs))
+        return ''.join(s.replace('|', '||') + ' | ' for s in strs)
 
     def decode(self, s):
         """Decodes a single string to a list of strings.
@@ -14,7 +14,7 @@ class Codec:
         :type s: str
         :rtype: List[str]
         """
-        return [s.replace('||', '|') for s in s.split(' | ')[:-1]]
+        return [i.replace('||', '|') for i in s.split(' | ')[:-1]]
 
 # Your Codec object will be instantiated and called as such:
 # codec = Codec()

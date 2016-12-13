@@ -4,7 +4,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        largest = max(nums)
-        s = sum(nums)
-        t = sum(range(largest + 1)) if largest == len(nums) else sum(range(largest + 2))
-        return t - s
+        _max = max(nums)
+        actual = sum(nums)
+        expected = sum(range(_max+1)) if _max == len(nums) else sum(range(_max+2))
+        return expected - actual

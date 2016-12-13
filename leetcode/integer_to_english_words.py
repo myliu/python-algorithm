@@ -9,6 +9,7 @@ class Solution(object):
         :type num: int
         :rtype: str
         """
+        # helper always add trailing space
         def helper(num):
             if num == 0:
                 return ''
@@ -26,7 +27,7 @@ class Solution(object):
             return 'Zero'
 
         while num > 0:
-            if num % 1000 != 0:
+            if num % 1000:
                 words = helper(num % 1000) + self.THOUSANDS[i] + ' ' + words
             num /= 1000
             i += 1

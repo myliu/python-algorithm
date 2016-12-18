@@ -5,6 +5,5 @@ class Solution(object):
         :type str: str
         :rtype: bool
         """
-        p = pattern
-        s = str.split()
-        return map(p.find, p) == map(s.index, s)
+        lst = str.split(' ')
+        return map(pattern.find, pattern) == map(lst.index, lst)

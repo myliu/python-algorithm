@@ -13,16 +13,17 @@ class Codec:
         :type root: TreeNode
         :rtype: str
         """
-        def helper(root):
+        def helper(root, vals):
             if not root:
-                vals.append('#')
+                vals += '#',
                 return
-            vals.append(str(root.val))
-            helper(root.left)
-            helper(root.right)
+
+            vals += str(root.val),
+            helper(root.left, vals)
+            helper(root.right, vals)
 
         vals = []
-        helper(root)
+        helper(root, vals)
         return ' '.join(vals)
 
 
@@ -32,17 +33,19 @@ class Codec:
         :type data: str
         :rtype: TreeNode
         """
-        def helper():
-            s = next(vals)
-            if s == '#':
+        def helper(_iter):
+            token = _iter.next()
+            if token == '#':
                 return None
-            root = TreeNode(int(s))
-            root.left = helper()
-            root.right = helper()
+
+            root = TreeNode(int(token))
+            root.left = helper(_iter)
+            root.right = helper(_iter)
             return root
 
-        vals = iter(data.split())
-        return helper()
+        _iter = iter(data.split())
+        return helper(_iter)
+
 
 # Your Codec object will be instantiated and called as such:
 # codec = Codec()

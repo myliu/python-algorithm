@@ -4,16 +4,17 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        if not nums or len(nums) == 0:
+        if not nums:
             return 0
 
-        if len(nums) == 1:
+        n = len(nums)
+        if n == 1:
             return 1
 
-        lis = [1] * len(nums)
-        for j in range(1, len(nums)):
-            for i in range(j):
-                if nums[j] > nums[i]:
-                    lis[j] = max(lis[j], lis[i] + 1)
+        dp = [1] * n
+        for i in range(1, n):
+            for j in range(i):
+                if nums[i] > nums[j]:
+                    dp[i] = max(dp[i], dp[j]+1)
 
-        return max(lis)
+        return max(dp)

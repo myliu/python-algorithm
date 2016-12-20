@@ -6,7 +6,6 @@ class Solution(object):
         :type y: int
         :rtype: int
         """
-        # This binary search solution ensures we always fallback to hi
         def first(lo, hi, check):
             while lo < hi:
                 mid = (lo + hi) / 2
@@ -15,8 +14,21 @@ class Solution(object):
                 else:
                     lo = mid + 1
             return lo
-        top    = first(0, x,             lambda x: '1' in image[x])
-        bottom = first(x, len(image),    lambda x: '1' not in image[x])
-        left   = first(0, y,             lambda y: any(row[y] == '1' for row in image))
-        right  = first(y, len(image[0]), lambda y: all(row[y] == '0' for row in image))
+        # To find the first black
+        top    = first(0, x,             lambda k: '1' in image[k])
+        # To find the first white
+        bottom = first(x, len(image),    lambda k: '1' not in image[k])
+        left   = first(0, y,             lambda k: any(row[k] == '1' for row in image))
+        right  = first(y, len(image[0]), lambda k: all(row[k] == '0' for row in image))
         return (bottom - top) * (right - left)
+
+"""
+["0010",
+ "0110",
+ "0100"]
+
+top = 0
+bottom = 3
+left = 1
+right = 3
+"""

@@ -1,4 +1,4 @@
-import collections
+from collections import defaultdict, deque
 
 # Definition for a binary tree node.
 # class TreeNode(object):
@@ -13,8 +13,9 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[List[int]]
         """
-        cols = collections.defaultdict(list)
-        queue = collections.deque([(root, 0)])
+        cols = defaultdict(list)
+        queue = deque()
+        queue += (root, 0),
 
         while queue:
             node, i = queue.popleft()
@@ -22,8 +23,8 @@ class Solution(object):
             if not node:
                 continue
 
-            cols[i].append(node.val)
-            queue.append((node.left, i-1))
-            queue.append((node.right, i+1))
+            cols[i] += node.val,
+            queue += (node.left, i-1),
+            queue += (node.right, i+1),
 
         return [cols[i] for i in sorted(cols)]

@@ -7,13 +7,12 @@ class Solution(object):
         n = len(words)
         values = [0 for _ in range(n)]
         for i in range(n):
-            word = words[i]
-            for j in range(len(word)):
-                values[i] |= 1 << (ord(word[j])-ord('a'))
+            for c in words[i]:
+                values[i] |= 1 << ord(c) - ord('a')
 
-        max_product = 0
+        _max = 0
         for i in range(n):
             for j in range(i+1, n):
-                if values[i] & values[j] == 0 and len(words[i]) * len(words[j]) > max_product:
-                    max_product = len(words[i]) * len(words[j])
-        return max_product
+                if values[i] & values[j] == 0 and len(words[i]) * len(words[j]) > _max:
+                    _max = len(words[i]) * len(words[j])
+        return _max

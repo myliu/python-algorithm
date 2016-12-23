@@ -4,15 +4,15 @@ class Solution(object):
         :type word: str
         :rtype: List[str]
         """
-        def helper(word, pos, cur, count, result):
-            if len(word) == pos:
-                # Once we reach the end, append current to the result
-                result.append(cur + str(count) if count > 0 else cur)
+        def helper(word, pos, tmp, count, result):
+            if pos == len(word):
+                # Once we reach the end, append tmp to the result
+                result += tmp + (str(count) if count > 0 else ''),
             else:
                 # Skip current position, and increment count
-                helper(word, pos + 1, cur, count + 1, result)
+                helper(word, pos + 1, tmp, count + 1, result)
                 # Include current position, and zero-out count
-                helper(word, pos + 1, cur + (str(count) if count > 0 else '') + word[pos], 0, result)
+                helper(word, pos + 1, tmp + (str(count) if count > 0 else '') + word[pos], 0, result)
 
         result = []
         helper(word, 0, '', 0, result)

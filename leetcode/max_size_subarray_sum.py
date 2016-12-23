@@ -5,15 +5,15 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        acc, ans = 0, 0
         d = {0:-1}
-        for i in xrange(len(nums)):
-            acc += nums[i]
-            if acc not in d:
-                d[acc] = i
-            if acc-k in d:
-                ans = max(ans, i-d[acc-k])
-        return ans
+        _sum, _max = 0, 0
+        for i, num in enumerate(nums):
+            _sum += num
+            if _sum not in d:
+                d[_sum] = i
+            if _sum - k in d:
+                _max = max(_max, i - d[_sum - k])
+        return _max
 
 if __name__ == '__main__':
     s = Solution()

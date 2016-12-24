@@ -7,27 +7,30 @@ class Solution(object):
         :rtype: int
         """
         # Example: [1, 2, 3]
-        def sort(lo, hi):
+        # [lo, hi)
+        def _sort(lo, hi):
+            # If there is only one element, there's nothing to sort, and the count is 0.
+            # The count is 0 because we need at least two elements to get 1 count.
+            if hi - lo <= 1:
+                return 0
+
             # e.g, if prefix = [0, 1, 3, 6], mid returns index=2 (value=3)
             # Because hi is exlusive, mid is always the middle element if length is odd
             # or the one towards the right if length is even.
-            mid = (lo+hi)/2
-            
-            # If there is only one element, there's nothing to sort, and the count is 0.
-            # The count is 0 because we need at least two elements to get 1 count.
-            if mid == lo:
-                return 0
+            mid = (lo + hi) / 2
 
-            count = sort(lo, mid) + sort(mid, hi)
+            count = _sort(lo, mid) + _sort(mid, hi)
             i = j = mid
             for left in prefix[lo:mid]:
-                while i < hi and prefix[i] - left < lower: i += 1
-                while j < hi and prefix[j] - left <= upper: j += 1
+                while i < hi and prefix[i] - left < lower:
+                    i += 1
+                while j < hi and prefix[j] - left <= upper:
+                    j += 1
                 count += j - i
             prefix[lo:hi] = sorted(prefix[lo:hi])
             return count
 
         prefix = [0]
         for num in nums:
-            prefix.append(prefix[-1] + num)
-        return sort(0, len(prefix))
+            prefix += prefix[-1] + num,
+        return _sort(0, len(prefix))

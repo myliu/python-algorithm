@@ -1,4 +1,6 @@
 class Solution(object):
+
+    # https://discuss.leetcode.com/topic/35494/solution-explanation
     def minPatches(self, nums, n):
         """
         :type nums: List[int]

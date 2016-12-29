@@ -8,23 +8,21 @@ class Solution(object):
             if cache[i][j]:
                 return cache[i][j]
 
-            max_len = 1
-            directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
-            for dir in directions:
-                x, y = i + dir[0], j + dir[1]
-                if x < 0 or x >= m or y < 0 or y >= n or matrix[x][y] <= matrix[i][j]:
-                    continue
-                max_len = max(max_len, 1 + dfs(x, y, m, n, cache))
-            cache[i][j] = max_len
-            return max_len
+            _max = 1
+            for dx, dy in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+                x, y = i + dx, j + dy
+                if 0 <= x < m and 0 <= y < n and matrix[x][y] > matrix[i][j]:
+                    _max = max(_max, dfs(x, y, m, n, cache) + 1)
+            cache[i][j] = _max
+            return _max
 
-        if not matrix:
+        if not matrix or not matrix[0]:
             return 0
 
         m, n = len(matrix), len(matrix[0])
-        cache =[[0 for _ in range(n)] for _ in range(m)]
-        max_len = 1
+        _max = 0
+        cache = [[0 for _ in range(n)] for _ in range(m)]
         for i in range(m):
             for j in range(n):
-                max_len = max(max_len, dfs(i, j, m, n, cache))
-        return max_len
+                _max = max(_max, dfs(i, j, m, n, cache))
+        return _max

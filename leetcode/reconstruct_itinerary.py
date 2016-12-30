@@ -1,4 +1,4 @@
-import collections
+from collections import defaultdict
 
 class Solution(object):
     def findItinerary(self, tickets):
@@ -6,13 +6,15 @@ class Solution(object):
         :type tickets: List[List[str]]
         :rtype: List[str]
         """
-        targets = collections.defaultdict(list)
-        for a, b in sorted(tickets)[::-1]:
-            targets[a].append(b)
-        routes = []
-        def visit(airport):
-            while targets[airport]:
-                visit(targets[airport].pop())
-            routes.append(airport)
-        visit('JFK')
-        return routes[::-1]
+        def visit(airport, flights, itinerary):
+            # while is to handle the case such as [["JFK","KUL"],["JFK","NRT"],["NRT","JFK"]]
+            while flights[airport]:
+                visit(flights[airport].pop(), flights, itinerary)
+            itinerary += airport,
+
+        flights = defaultdict(list)
+        for start, end in sorted(tickets, reverse=True):
+            flights[start] += end,
+        itinerary = []
+        visit('JFK', flights, itinerary)
+        return itinerary[::-1]

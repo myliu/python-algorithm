@@ -6,6 +6,8 @@
 #         self.right = None
 
 class Solution(object):
+
+    # https://discuss.leetcode.com/topic/36966/short-python-solution
     def largestBSTSubtree(self, root):
         """
         :type root: TreeNode

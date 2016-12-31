@@ -12,5 +12,4 @@ class Solution(object):
             return 3 ** (n/3)
         if n % 3 == 1:
             return 2 * 2 * 3 ** ((n-4)/3)
-        else:
-            return 2 * 3 ** ((n-2)/3)
+        return 2 * 3 ** ((n-2)/3)

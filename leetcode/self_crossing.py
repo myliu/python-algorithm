@@ -1,4 +1,6 @@
 class Solution(object):
+
+    # https://discuss.leetcode.com/topic/38014/java-oms-with-explanation
     def isSelfCrossing(self, x):
         """
         :type x: List[int]

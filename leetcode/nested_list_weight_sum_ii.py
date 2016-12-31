@@ -3,10 +3,28 @@
 # You should not implement it, or speculate about its implementation
 # """
 #class NestedInteger(object):
+#    def __init__(self, value=None):
+#        """
+#        If value is not specified, initializes an empty list.
+#        Otherwise initializes a single integer equal to value.
+#        """
+#
 #    def isInteger(self):
 #        """
 #        @return True if this NestedInteger holds a single integer, rather than a nested list.
 #        :rtype bool
+#        """
+#
+#    def add(self, elem):
+#        """
+#        Set this NestedInteger to hold a nested list and adds a nested integer elem to it.
+#        :rtype void
+#        """
+#
+#    def setInteger(self, value):
+#        """
+#        Set this NestedInteger to hold a single integer equal to value.
+#        :rtype void
 #        """
 #
 #    def getInteger(self):
@@ -29,14 +47,14 @@ class Solution(object):
         :type nestedList: List[NestedInteger]
         :rtype: int
         """
-        unweighted, weighted = 0, 0
+        weighted, unweighted = 0, 0
         while nestedList:
-            next = []
-            for i in nestedList:
-                if i.isInteger():
-                    unweighted += i.getInteger()
+            _next = []
+            for nested_int in nestedList:
+                if nested_int.isInteger():
+                    unweighted += nested_int.getInteger()
                 else:
-                    next += i.getList()
+                    _next += nested_int.getList()
             weighted += unweighted
-            nestedList = next
+            nestedList = _next
         return weighted

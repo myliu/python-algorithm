@@ -1,3 +1,5 @@
+from collections import Counter
+
 class TicTacToe(object):
 
     def __init__(self, n):
@@ -5,9 +7,8 @@ class TicTacToe(object):
         Initialize your data structure here.
         :type n: int
         """
-        self.count = collections.Counter()
+        self.counter = Counter()
         self.n = n
-
 
     def move(self, row, col, player):
         """
@@ -24,11 +25,11 @@ class TicTacToe(object):
         :type player: int
         :rtype: int
         """
-        for i, x in enumerate((row, col, row+col, row-col)):
-            self.count[i, x, player] += 1
-            if self.count[i, x, player] == self.n:
+        for _type, val in enumerate([row, col, row+col, row-col]):
+            self.counter[_type, val, player] += 1
+            if self.counter[_type, val, player] == self.n:
                 return player
-        return 0        
+        return 0
 
 
 # Your TicTacToe object will be instantiated and called as such:

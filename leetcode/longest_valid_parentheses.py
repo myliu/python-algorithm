@@ -16,7 +16,7 @@ class Solution(object):
                     if not stack:
                         _max = max(_max, count)
                     else:
-                        # Handle the case: '(()()'
+                        # Handle the case: '()(()'
                         _max = max(_max, i-stack[-1])
                 else:
                     count = 0

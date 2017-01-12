@@ -22,3 +22,7 @@ class Solution(object):
         # Deal with the last line
         results += ' '.join(current).ljust(maxWidth),
         return results
+
+if __name__ == '__main__':
+    s = Solution()
+    print s.fullJustify(["This", "is", "an", "example", "of", "text", "justification."], 16)

@@ -7,12 +7,11 @@ class Solution(object):
         if not nums:
             return
 
-        insert_pos = 0
+        end = 0
         for num in nums:
             if num:
-                nums[insert_pos] = num
-                insert_pos += 1
+                nums[end] = num
+                end += 1
 
-        while insert_pos < len(nums):
-            nums[insert_pos] = 0
-            insert_pos += 1
+        for i in range(end, len(nums)):
+            nums[i] = 0

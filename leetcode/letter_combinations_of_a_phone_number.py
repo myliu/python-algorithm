@@ -5,15 +5,16 @@ class Solution(object):
         :rtype: List[str]
         """
         mapping = ['', '', 'abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz']
-        result = []
-        self.helper(digits, '', result, mapping)
-        return result
 
-    def helper(self, digits, tmp, result, mapping):
-        if not digits:
-            if tmp:
-                result += tmp,
-            return
+        def dfs(digits, start, tmp, results):
+            if start == len(digits):
+                if tmp:
+                    results += tmp,
+                return
 
-        for c in mapping[int(digits[0])]:
-            self.helper(digits[1:], tmp+c, result, mapping)
+            for c in mapping[int(digits[start])]:
+                dfs(digits, start+1, tmp+c, results)
+
+        results = []
+        dfs(digits, 0, '', results)
+        return results

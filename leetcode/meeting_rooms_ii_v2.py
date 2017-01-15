@@ -17,18 +17,16 @@ class Solution(object):
             return 0
 
         intervals.sort(key=lambda x:x.start)
-        n = len(intervals)
         heap = []
-        heapq.heappush(heap, (intervals[0].end, intervals[0].start))
-        for i in range(1, n):
-            end, start = heapq.heappop(heap)
-
-            # When there is no overlap, merge intervals
-            if intervals[i].start >= end:
-                end = intervals[i].end
-            # When there is an overlap, add the new time interval to min heap
+        heappush(heap, (intervals[0].end, intervals[0].start))
+        for interval in intervals[1:]:
+            end, start = heappop(heap)
+            
+            if interval.start < end:
+                # When there is an overlap, add the new time interval to min heap
+                heappush(heap, (interval.end, interval.start))
             else:
-                heapq.heappush(heap, (intervals[i].end, intervals[i].start))
-
-            heapq.heappush(heap, (end, start))
+                # When there is no overlap, merge intervals
+                end = max(end, interval.end)
+            heappush(heap, (end, start))
         return len(heap)

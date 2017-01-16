@@ -16,9 +16,9 @@ class Solution(object):
             helper(s, start+1, tmp+interpret(s[start]), result)
 
             if start + 1 < len(s):
-                c = interpret(s[start:start+2])
-                if c:
-                    helper(s, start+2, tmp+c, result)
+                two = interpret(s[start:start+2])
+                if two:
+                    helper(s, start+2, tmp+two, result)
 
         result = []
         helper(s, 0, '', result)

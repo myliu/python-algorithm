@@ -17,10 +17,17 @@ class Solution(object):
         for suffix in suffixes:
             output += (prefix + suffix),
 
-    def get_interpretations(s):
+    def generate_interpretations(s):
         outputs = []
         if not s:
             output += '',
             return output
 
-        _prepend(_interpret(s, 1), self.get_interpretations(s[1:]), outputs)
+        _prepend(_interpret(s, 1), self.generate_interpretations(s[1:]), outputs)
+
+        if len(s) > 1:
+            two = _interpret(s, 2)
+            if two:
+                _prepend(two, self.generate_interpretations(s[2:]), outputs)
+
+        return outputs

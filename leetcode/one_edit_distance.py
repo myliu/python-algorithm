@@ -15,4 +15,4 @@ class Solution(object):
                     return s[i+1:] == t[i:]
 
         # Note: If s and t are the same, they are not one edit distance apart.
-        return abs(len(s)-len(t)) <= 1
+        return abs(len(s)-len(t)) == 1

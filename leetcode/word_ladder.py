@@ -13,6 +13,11 @@ class Solution(object):
         return self.bfs(set1, set2, wordList, 1)
 
     def bfs(self, set1, set2, words, level):
+        print level
+        print set1
+        print set2
+        print '-------'
+
         if not set1:
             return 0
 
@@ -40,3 +45,8 @@ class Solution(object):
                         set3.add(tmp)
 
         return self.bfs(set2, set3, words, level+1)
+
+if __name__ == '__main__':
+    s = Solution()
+    wordlist = set(["hot","dot","dog","lot","log"])
+    print s.ladderLength('hit', 'cog', wordlist)

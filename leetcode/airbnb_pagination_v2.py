@@ -2,11 +2,13 @@
 Search result pagination
 """
 
+from collections import OrderedDict
+
 def pagination(num, results):
     output = []
 
     while results:
-        page = {}
+        page = OrderedDict()
         deferred = []
         i = 0
         while i < len(results):
@@ -24,7 +26,7 @@ def pagination(num, results):
 
             i += 1
 
-        for host_id, listing_id, score, city in sorted(page.values(), key=lambda x:x[2], reverse=True):
+        for host_id, listing_id, score, city in page.values():
             output += ','.join([host_id, listing_id, str(score), city]),
 
         results = deferred + results[i+1:]

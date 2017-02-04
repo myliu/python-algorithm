@@ -18,14 +18,14 @@ class Solution(object):
     In order to determine which part to discard, we should compare nums1[start1 + k/2 - 1].
     """
     def find_kth(self, nums1, start1, nums2, start2, k):
-            if start1 >= len(nums1):
+            if start1 == len(nums1):
                 print start1
-                print 'if start1 >= len(nums1): ' + str(nums2[start2+k-1])
+                print 'if start1 == len(nums1): ' + str(nums2[start2+k-1])
                 return nums2[start2+k-1]
 
-            if start2 >= len(nums2):
+            if start2 == len(nums2):
                 print start2
-                print 'if start2 >= len(nums2): ' + str(nums1[start1+k-1])
+                print 'if start2 == len(nums2): ' + str(nums1[start1+k-1])
                 return nums1[start1+k-1]
 
             if k == 1:

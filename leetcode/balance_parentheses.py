@@ -1,20 +1,25 @@
 def balance(s):
+    lst = list(s)
     count = 0
-    n = len(s)
+    n = len(lst)
     for i in range(n):
-        if s[i] == '(':
+        if lst[i] == '(':
             count += 1
-        elif s[i] == ')':
+        elif lst[i] == ')':
             if count == 0:
-                s[i] = '#'
+                lst[i] = '#'
             else:
                 count -= 1
 
     for i in range(n-1, -1, -1):
         if count == 0:
             break
-        if s[i] == '(':
-            s[i] = '#'
+        if lst[i] == '(':
+            lst[i] = '#'
             count -= 1
 
+    s = ''.join(lst)
     return s.replace('#', '')
+
+print balance("()())()")
+print balance("(a)(()()")

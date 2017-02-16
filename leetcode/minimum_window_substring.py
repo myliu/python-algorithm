@@ -13,7 +13,8 @@ class Solution(object):
         # [start:end) are the minimal window boundary
         left = right = start = end = 0
         while right < len(s):
-            missing -= 1 if need[s[right]] > 0 else 0
+            if need[s[right]] > 0:
+                missing -= 1 
             need[s[right]] -= 1
             if not missing:
                 while left < right and need[s[left]] < 0:

@@ -13,7 +13,7 @@ class Solution(object):
         # Value: word
         prefix_map = defaultdict(list)
         for word in words:
-            for i in range(n):
+            for i in range(1, n):
                 prefix_map[word[:i]] += word,
 
         def build(square, squares):

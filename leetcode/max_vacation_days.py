@@ -2,18 +2,20 @@
 MAX_DISTANCE = 6
 
 def max_vacation(dists, vacs_week_office):
+    office_num, week_num = len(vacs_week_office[0]), len(vacs_week_office)
+
     # Calculate valid neighbours
     valid_neighbours = []
     for offices in dists:
-        valid_neighbours += [i for i in range(len(offices)) if offices[i] <= MAX_DISTANCE],
+        valid_neighbours += [i for i in range(office_num) if offices[i] <= MAX_DISTANCE],
     # print valid_neighbours
 
     # Build the dynamic programming board (table)
     board = []
-    board += [[-1, v] for v in vacs_week_office[0]], # first week
-    for week in range(1, len(vacs_week_office)): # rest of the weeks
+    board += [(-1, v) for v in vacs_week_office[0]], # first week
+    for week in range(1, week_num): # rest of the weeks
         this_week = []
-        for office in range(len(vacs_week_office[week])):
+        for office in range(office_num):
             max_vacs = 0
             max_source = -1
             for neighbour in valid_neighbours[office]:
@@ -29,12 +31,12 @@ def max_vacation(dists, vacs_week_office):
     # Find the max, and iterate backwards
     index = 0
     max_vacs = board[-1][0][1]
-    for office in range(len(board[-1])):
+    for office in range(office_num):
         if board[-1][office][1] > max_vacs:
             max_vacs = board[-1][office][1]
             index = office
 
-    solution = [-1] * len(vacs_week_office)
+    solution = [-1] * week_num
     week = len(solution) - 1
     while week >= 0:
         solution[week] = index
@@ -48,6 +50,8 @@ dists = [[0, 5, 9],
          [5, 0, 5],
          [9, 5, 0]]
 
+# column: office
+# row: week
 vacs_week_office = [[2, 0, 1],
                     [0, 3, 2],
                     [2, 0, 0]]

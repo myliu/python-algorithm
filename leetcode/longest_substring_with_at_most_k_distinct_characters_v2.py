@@ -17,7 +17,7 @@ class Solution(object):
                 longest = max(longest, right-left+1)
                 right += 1
                 continue
-            while left <= right and len(window) > k:
+            while left < right and len(window) > k:
                 window[s[left]] -= 1
                 if not window[s[left]]:
                     del window[s[left]]

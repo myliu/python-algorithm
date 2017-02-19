@@ -12,6 +12,8 @@ class Solution(object):
         col_hits = [0] * n
         for i, row in enumerate(grid):
             for j, cell in enumerate(row):
+                if cell == 'W':
+                    continue
                 if j == 0 or row[j-1] == 'W':
                     row_hits = 0
                     k = j

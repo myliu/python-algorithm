@@ -1,6 +1,13 @@
+"""
+a -> b, c, d
+b -> e, f
+e -> h
+f -> i, j
+d -> g
+"""
+
 # time: O(n)
 # space: O(depth)
-
 def deepest_node_lca(root):
     def helper(root):
         result, max_depth = root, 0

@@ -7,7 +7,9 @@ class Solution(object):
         :rtype: str
         """
         orders = defaultdict(set)
-        degrees = dict.fromkeys(set(''.join(words)), 0)
+        degrees = {}
+        for c in set(''.join(words)):
+            degrees[c] = 0
 
         for i in range(len(words)-1):
             curr = words[i]
@@ -21,9 +23,6 @@ class Solution(object):
                     degrees[_next[j]] += 1
                 # The loop need to be broken anyway if curr[j] != _next[j]
                 break
-            else:
-                if curr[:length] == _next[:length] and len(curr) > len(_next):
-                    return ''
 
         queue = deque()
         for k, v in degrees.items():

@@ -17,7 +17,7 @@ class Solution(object):
         for i in range(len(board)):
             for j in range(len(board[0])):
                 self.dfs(board, i, j, root, '', result)
-        return result
+        return self.subsets(result)
 
     def build_trie(self, words):
         root = TrieNode()
@@ -48,6 +48,31 @@ class Solution(object):
         for dx, dy in directions:
             self.dfs(board, i+dx, j+dy, child, tmp + c, result)
         board[i][j] = c
+
+    def subsets(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        result = []
+        self.helper(nums, 0, [], result)
+        _max = []
+        for r in result:
+            chars = set()
+            for c in r:
+                if set(c).intersection(chars):
+                    break
+                chars = chars.union(set(c))
+            else:
+                if len(r) > len(_max):
+                    _max = r
+        return _max
+
+    def helper(self, nums, start, tmp, result):
+        result += tmp,
+        
+        for i in range(start, len(nums)):
+            self.helper(nums, i+1, tmp+[nums[i]], result)
 
 if __name__ == '__main__':
     # board = [['G','I','Z'],

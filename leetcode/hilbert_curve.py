@@ -12,12 +12,14 @@ def hilbertCurve(x, y, iter):
         # 2 Shape is identical with previous iteration
         return num + hilbertCurve(x, y - len, iter - 1)
     elif x < len and y < len:
-        # 1 Clock-wise rotate 90
+        # 1 Flip diagonally
         return hilbertCurve(y, x, iter - 1)
     else:
-        # 4 Anti-Clockwise rotate 90
+        # 4 Flip diagonally
         return 3 * num + hilbertCurve(len - 1 - y, 2 * len - 1 - x, iter - 1)
 
 print hilbertCurve(1, 1, 2) # 3
 print hilbertCurve(0, 1, 1) # 2
 print hilbertCurve(2, 2, 2) # 9
+print hilbertCurve(1, 0, 2) # 2
+print hilbertCurve(2, 0, 2) 

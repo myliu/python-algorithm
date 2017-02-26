@@ -50,9 +50,13 @@ class Solution(object):
         board[i][j] = c
 
 if __name__ == '__main__':
-    board = [['G','I','Z'],
-             ['U','E','K'],
-             ['Q','S','E']]
-    words = ["GEEKS", "FOR", "QUIZ", "GO"]
+    # board = [['G','I','Z'],
+    #          ['U','E','K'],
+    #          ['Q','S','E']]
+    # words = ["GEEKS", "FOR", "QUIZ", "GO"]
+    board = [['a', 'b', 'c'],
+             ['d', 'e', 'f'],
+             ['g', 'h', 'i']]
+    words = ["abce", "cfi", "beh", "defi", "gh", "gda"]
     s = Solution()
     print s.findWords(board, words)

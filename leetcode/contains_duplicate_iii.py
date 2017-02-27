@@ -15,6 +15,7 @@ class Solution(object):
         n = len(nums)
         w = t + 1
         for i, num in enumerate(nums):
+            print i, num, buckets
             b = num / w
             if b in buckets:
                 return True
@@ -31,3 +32,8 @@ class Solution(object):
             if i >= k:
                 del buckets[nums[i-k]/w]
         return False
+
+if __name__ == '__main__':
+    s = Solution()
+    nums = [1, 4, 8, 5]
+    print s.containsNearbyAlmostDuplicate(nums, 3, 2)
